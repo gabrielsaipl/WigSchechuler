@@ -1,0 +1,55 @@
+﻿@using static Calendar.Pages.CalendarView;
+
+@if (!nextView)
+{
+
+    <div class="mother-of-all-divs  @(hide ? "d-none" : "d-show")">
+        <CalendarHeader CSSClass="calendar-header2" DateValue="@MonthYear" PreviousButtonEvent="PreviousMonth" NextButtonEvent="NextMonth">
+            <CalendarButtons>
+                @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
+                <CalendarView Option="View.HorizontalYear" DisplayName="Horizontal Year Calendar" Event="CreateView"></CalendarView>
+                <CalendarView Option="View.HorizontalFullYear" DisplayName="Horizontal Full Year Calendar" Event="CreateView"></CalendarView>
+                <CalendarView Option="View.Month" DisplayName="Month Calendar" Event="CreateView"></CalendarView>
+            </CalendarButtons>
+        </CalendarHeader>
+        <CalendarBody Type="CalendarBody.calendar.HorizontalMonth" ResourceData="Resourcedata" CurrentMonthValue="_currentMonth" DayData="Days" EventData="Events" HorizontalMonthDayClickMethod="DayClicked" EventClickMethod="EventDetails">
+        </CalendarBody>
+    </div>
+}
+
+@if (nextView)
+{
+    //prevent popups from appearing
+    showPopup = false;
+    showDetails = false;
+
+    <HorizontalYearCalendar></HorizontalYearCalendar>
+}
+
+            @*can turn this into a component*@
+@if (hide == true)
+{
+    
+    if (calendarSelected == 2)
+    {
+        showPopup = false;
+        showDetails = false;
+        <HorizontalYearCalendar></HorizontalYearCalendar>
+    }
+    else if (calendarSelected == 3)
+    {
+        showPopup = false;
+        showDetails = false;
+        <HorizontalFullYearCalendar></HorizontalFullYearCalendar>
+    }
+    else if (calendarSelected == 4)
+    {
+        showPopup = false;
+        showDetails = false;
+        <MonthCalendar></MonthCalendar>
+    }
+}
+
+<AddEventPopup ShowPopup="@showPopup" SelectedDay="@DaySelected" Resource="SelectedResource" OnEventAdded="HandleEventAdded" SelectedDate="DateSelected" />
+
+<EventDetail Event="EventDetail" ShowDetails="@showDetails"></EventDetail>

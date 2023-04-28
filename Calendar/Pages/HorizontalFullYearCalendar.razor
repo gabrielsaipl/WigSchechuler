@@ -1,0 +1,54 @@
+﻿@using static Calendar.Pages.CalendarView;
+
+@if (!nextView)
+{
+
+    <div class="mother-of-all-divs @(hide ? "d-none" : "d-show" )">
+        <CalendarHeader CSSClass="calendar-header2" DateValue="@Year" NextButtonEvent="NextYear" PreviousButtonEvent="PreviousYear">
+            <CalendarButtons>
+                <CalendarView Option="View.Month" DisplayName="Month Calendar" Event="CreateView"></CalendarView>
+                <CalendarView Option="View.HorizontalMonth" DisplayName="Horizontal Month Calendar" Event="CreateView"></CalendarView>
+                <CalendarView Option="View.HorizontalYear" DisplayName="Horizontal Year Calendar" Event="CreateView"></CalendarView>
+            </CalendarButtons>
+        </CalendarHeader>
+        <CalendarBody Type="CalendarBody.calendar.HorizontalFullYear" MonthsList="@monthsOfYear" MonthData="Months" YearString="@Year" DayData="Days" ResourceData="data" CurrentMonthValue="@_currentMonth" EventData="Events" HorizontalFullYearDayClickMethod="DayClicked" EventClickMethod="EventDetails">
+        </CalendarBody>
+
+    </div>
+}
+@if (nextView)
+{
+    //prevent popups from appearing
+    showPopup = false;
+    showDetails = false;
+
+    <MonthCalendar></MonthCalendar>
+}
+
+@*can turn this into a component*@
+@if (hide == true)
+{
+    if (calendarSelected == 4)
+    {
+        showPopup = false;
+        showDetails = false;
+        <MonthCalendar></MonthCalendar>
+    }
+    else if (calendarSelected == 1)
+    {
+        showPopup = false;
+        showDetails = false;
+        <HorizontalMonthCalendar></HorizontalMonthCalendar>
+    }
+    else if (calendarSelected == 2)
+    {
+        showPopup = false;
+        showDetails = false;
+        <HorizontalYearCalendar></HorizontalYearCalendar>
+    }
+    
+}
+
+<AddEventPopup ShowPopup="@showPopup" SelectedDay="@DaySelected" Resource="SelectedResource" OnEventAdded="HandleEventAdded" SelectedDate="DateSelected" />
+
+<EventDetail Event="EventDetail" ShowDetails="@showDetails"></EventDetail>

@@ -1,0 +1,44 @@
+﻿
+<div class="popup-container" style="@popupStyle">
+    <div class="popup">
+        <div class="calendar-header">
+            <h3>Evento</h3>
+            <div class="close" @onclick="Close"> Fechar X</div>
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="eventName">Nome do Evento:</label>
+                <input type="text" class="form-control" id="eventName" @bind="Event.Title" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="eventName">Descrição do Evento:</label>
+                <input type="text" class="form-control" id="eventDescription" @bind="Event.Description" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="eventStartDate">Data de inicio do Evento:</label>
+                <input type="date" class="form-control" id="eventStartDate" @bind="Event.StartDate" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="eventEndDate">Data final do Evento:</label>
+                <input type="date" class="form-control" id="eventEndDate" @bind="Event.EndDate" readonly />
+            </div>
+            <div class="form-group">
+                <label for="eventResource">Recurso:</label>
+                <input type="text" class="form-control" id="eventResource" @bind="Event.EventResource" readonly/>
+            </div>
+        </form>
+    </div>
+</div>
+@code {
+    [Parameter]
+    public bool ShowDetails { get; set; }
+    [Parameter]
+    public Event? Event { get; set; }
+
+    private string popupStyle => ShowDetails ? "display:block" : "display:none";
+
+    private void Close()
+    {
+        ShowDetails = false;
+    }
+}

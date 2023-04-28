@@ -1,0 +1,16 @@
+﻿<div class=@CSSClass>
+@foreach (var item in DataSource)
+{
+    <div class="@ResourceCSSClass">
+        @item.Text @item.Id
+    </div>
+}
+</div>
+@code {
+    [Parameter]
+    public List<ResourceData> DataSource { get; set; } = new List<ResourceData>();
+    [Parameter]
+    public string ResourceCSSClass { get; set; } = "line";
+    [Parameter]
+    public string CSSClass { get; set; } = "calendar-resources";
+}

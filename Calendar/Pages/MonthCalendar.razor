@@ -1,0 +1,61 @@
+﻿@using static Calendar.Pages.CalendarView;
+@* one way to hide the view*@
+@if (!nextView)
+{
+                        @* onother way to hide the view*@
+<div class="calendar @(hide ? "d-none" : "d-show")">
+        <CalendarHeader DateValue="@MonthYear" NextButtonEvent="NextMonth" PreviousButtonEvent="PreviousMonth">
+            <CalendarButtons>
+                @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
+                <CalendarView Option="View.HorizontalMonth" DisplayName="Horizontal Month Calendar" Event="CreateView" CSSClass=""></CalendarView>
+                <CalendarView Option="View.HorizontalYear" DisplayName="Horizontal Year Calendar" Event="CreateView" CSSClass=""></CalendarView>
+                <CalendarView Option="View.HorizontalFullYear" DisplayName="Horizontal Full Year Calendar" Event="CreateView" CSSClass=""></CalendarView>
+            </CalendarButtons>
+        </CalendarHeader>
+    <div class="calendar-week-day">
+        <div class="calendar-week-day-child">Dom</div>
+        <div class="calendar-week-day-child">Seg</div>
+        <div class="calendar-week-day-child">Ter</div>
+        <div class="calendar-week-day-child">Qua</div>
+        <div class="calendar-week-day-child">Qui</div>
+        <div class="calendar-week-day-child">Sex</div>
+        <div class="calendar-week-day-child">Sáb</div>
+    </div>
+        <CalendarBody Type="CalendarBody.calendar.Month" WeekData="Weeks" EventData="Events" MonthDayClickMethod="DayClicked" EventClickMethod="EventDetails"></CalendarBody>
+</div>
+}
+
+@if (nextView)
+{
+    //prevent popups from appearing
+    showPopup = false;
+    showDetails = false;
+
+    <HorizontalMonthCalendar></HorizontalMonthCalendar>
+}
+            @*can turn this into a component*@
+@if (hide == true)
+{
+    if (calendarSelected == 1)
+    {
+        showPopup = false;
+        showDetails = false;
+        <HorizontalMonthCalendar></HorizontalMonthCalendar>
+    }
+    else if (calendarSelected == 2)
+    {
+        showPopup = false;
+        showDetails = false;
+        <HorizontalYearCalendar></HorizontalYearCalendar>
+    }
+    else if (calendarSelected == 3)
+    {
+        showPopup = false;
+        showDetails = false;
+        <HorizontalFullYearCalendar></HorizontalFullYearCalendar>
+    }
+}
+
+<AddEventPopup ShowPopup="@showPopup" SelectedDay="@selectedDay" Resource="1" OnEventAdded="HandleEventAdded" SelectedDate="DateSelected" />
+
+<EventDetail Event="EventDetail" ShowDetails="@showDetails"></EventDetail>

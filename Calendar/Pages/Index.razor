@@ -1,0 +1,23 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime
+<PageTitle>Calendar</PageTitle>
+
+
+<div class="calendar" @key="@($"{month}-{year}")">
+    <div class="calendar-header">
+        <div class="calendar-header-child calendar-prev" id="previous"></div>
+        <div class="calendar-header-child calendar-month" id="calendar-month"></div>
+        <div class="calendar-header-child calendar-next" id="next"></div>
+    </div>
+    <div class="calendar-body">
+        <div class="calendar-week-day">
+            <div class="calendar-week-day-child">Sun</div>
+            <div class="calendar-week-day-child">Mon</div>
+            <div class="calendar-week-day-child">Tue</div>
+            <div class="calendar-week-day-child">Wed</div>
+            <div class="calendar-week-day-child">Thu</div>
+            <div class="calendar-week-day-child">Fri</div>
+            <div class="calendar-week-day-child">Sat</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿@if (verticalMonth)
+{
+    <MonthCalendar></MonthCalendar>
+}
+else if (horizontalMonth)
+{
+    <HorizontalMonthCalendar></HorizontalMonthCalendar>
+}
+else if (horizontalYear)
+{
+    <HorizontalYearCalendar></HorizontalYearCalendar>
+}
+else if (horizontalMonthExtented)
+{
+    <HorizontalFullYearCalendar></HorizontalFullYearCalendar>
+}
+
+@code {
+    [Parameter]
+    public bool verticalMonth { get; set; }
+    [Parameter]
+    public bool horizontalMonth { get; set; }
+    [Parameter]
+    public bool horizontalMonthExtented { get; set; }
+    [Parameter]
+    public bool horizontalYear { get; set; }
+
+}

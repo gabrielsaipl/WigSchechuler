@@ -1,0 +1,55 @@
+﻿
+<div class="popup-container" style="@popupStyle">
+    <div class="popup">
+        <div class="calendar-header">
+        <h3>Adicionar Evento</h3>
+        <div class="close" @onclick="Close"> Fechar X</div>
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="eventName">Nome do Evento:</label>
+                <input type="text" class="form-control" id="eventName" @bind="eventName" />
+            </div>
+            <div class="form-group">
+                <label for="eventName">Descrição do Evento:</label>
+                <input type="text" class="form-control" id="eventDescription" @bind="eventDescription" />
+            </div>
+            <div class="form-group">
+                <label for="eventDate">Data do Evento:</label>
+                <input type="date" class="form-control" id="eventDate" @bind="SelectedDate" />
+            </div>
+            <div class="form-group">
+                <label for="eventDate">Recurso:</label>
+                <input type="text" class="form-control" id="eventResource" @bind="Resource" />
+            </div>
+            <button type="submit" class="btn btn-primary" @onclick="AddEvent">Adicionar Evento</button>
+        </form>
+    </div>
+</div>
+@code {
+    [Parameter]
+    public DateTime SelectedDate { get; set; }
+    [Parameter]
+    public bool ShowPopup { get; set; }
+    [Parameter]
+    public Day SelectedDay { get; set; }
+    [Parameter]
+    public int Resource { get; set; }
+    [Parameter]
+    public Action<string, DateTime, string, Day, int> OnEventAdded { get; set; }
+
+    private string eventName;
+    private string eventDescription;
+
+    private string popupStyle => ShowPopup ? "display:block" : "display:none";
+
+    private void AddEvent()
+    {
+        OnEventAdded.Invoke(eventName, SelectedDate, eventDescription, SelectedDay, Resource);
+
+    }
+    private void Close()
+    {
+        ShowPopup = false;
+    }
+}

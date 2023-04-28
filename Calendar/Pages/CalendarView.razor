@@ -1,0 +1,45 @@
+﻿@if (Option == View.HorizontalMonth)
+{
+    <button class="@CSSClass" @onclick=@(()=>{calendar = 1; OpenView();})> @DisplayName </button>
+    
+}
+
+else if (Option == View.HorizontalYear)
+{
+    <button class="@CSSClass" @onclick=@(()=>{calendar = 2; OpenView();})> @DisplayName </button>
+}
+
+else if (Option == View.HorizontalFullYear)
+{
+    <button class="@CSSClass" @onclick=@(()=>{calendar = 3;OpenView();})> @DisplayName </button>
+}
+else if (Option == View.Month)
+{
+    <button class="@CSSClass" @onclick=@(()=>{calendar = 4; OpenView();})> @DisplayName </button>
+}
+
+@code {
+    public enum View
+    {
+        Month,
+        HorizontalMonth,
+        HorizontalYear,
+        HorizontalFullYear,
+    }
+
+    [Parameter]
+    public View Option { get; set; }
+    [Parameter]
+    public string DisplayName { get; set; } = "";
+    [Parameter]
+    public Action<int> Event{ get; set; }
+    [Parameter]
+    public string CSSClass { get; set; } = "btn btn-primary";
+    private int calendar;
+
+    private void OpenView()
+    {
+        Event.Invoke(calendar);
+
+    }
+}
