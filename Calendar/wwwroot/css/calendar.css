@@ -1,0 +1,17 @@
+﻿:root {
+    --brand-primary: #88B97C;
+    --brand-primary-light: scale-color($brand-primary, $lightness: +70%);
+
+    --brand-secondary:#423E3E;
+    --body-color: #252526;
+}
+
+
+body{
+    background-color: blue;
+}
+
+.calendar-week-day-child {
+    border: none;
+    background-color: #F5F6FA;
+}

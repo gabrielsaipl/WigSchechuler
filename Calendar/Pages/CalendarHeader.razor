@@ -1,15 +1,32 @@
-﻿        <div class="@CSSClass">
-        <button class="calendar-prev" @onclick="PreviousButtonEvent">&lt;</button>
-            <div class="calendar-month">@DateValue</div>
-        <div>
-            @CalendarButtons
-        </div>
-        <button class="calendar-next" @onclick="NextButtonEvent">&gt;</button>
-        </div>
+﻿<div class="@CSSClass">
+    <div class="btn-group">
+        @CalendarButtonsLeft
+    </div>
+    <div style="display:flex; align-items: center">
+        <button class="calendar-prev" @onclick="PreviousButtonEvent">
+            <svg width="7.535" height="13.179" viewBox="0 0 7.535 13.179">
+                <path d="M6.592,5.264,11.575.277a.938.938,0,0,1,1.33,0,.95.95,0,0,1,0,1.334L7.259,7.261a.94.94,0,0,1-1.3.027L.275,1.615A.942.942,0,0,1,1.6.281Z" transform="translate(7.535) rotate(90)" fill="#515163" />
+            </svg>
+        </button>
+        <div class="calendar-month">@DateValue</div>
+
+        <button class="calendar-next" @onclick="NextButtonEvent">
+            <svg width="7.535" height="13.179" viewBox="0 0 7.535 13.179">
+                <path d="M6.592,5.264,11.575.277a.938.938,0,0,1,1.33,0,.95.95,0,0,1,0,1.334L7.259,7.261a.94.94,0,0,1-1.3.027L.275,1.615A.942.942,0,0,1,1.6.281Z" transform="translate(0 13.179) rotate(-90)" fill="#515163" />
+            </svg>
+        </button>
+    </div>
+    
+    <div class="btn-group">
+        @CalendarButtons
+    </div>
+</div>
 
 @code {
     [Parameter]
     public RenderFragment CalendarButtons { get; set; }
+    [Parameter]
+    public RenderFragment CalendarButtonsLeft { get; set; }
     [Parameter]
     public EventCallback PreviousButtonEvent { get; set; }
     [Parameter]

@@ -94,14 +94,7 @@ a, .btn-link {
     padding: 10px 20px 10px 20px;
     margin: 5px;
 }
-/* For the names of the days of the week */
-.calendar-week-day {
-    height: 107px;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    align-content: center;
-    text-align: center;
-}
+
 
 .calendar-week-day-child {
     border: 0.5px solid blue;

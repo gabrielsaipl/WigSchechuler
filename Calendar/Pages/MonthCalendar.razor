@@ -4,22 +4,26 @@
 {
                         @* onother way to hide the view*@
 <div class="calendar @(hide ? "d-none" : "d-show")">
-        <CalendarHeader DateValue="@MonthYear" NextButtonEvent="NextMonth" PreviousButtonEvent="PreviousMonth">
-            <CalendarButtons>
-                @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
-                <CalendarView Option="View.HorizontalMonth" DisplayName="Horizontal Month Calendar" Event="CreateView" CSSClass=""></CalendarView>
-                <CalendarView Option="View.HorizontalYear" DisplayName="Horizontal Year Calendar" Event="CreateView" CSSClass=""></CalendarView>
-                <CalendarView Option="View.HorizontalFullYear" DisplayName="Horizontal Full Year Calendar" Event="CreateView" CSSClass=""></CalendarView>
-            </CalendarButtons>
-        </CalendarHeader>
+    <CalendarHeader DateValue="@MonthYear" NextButtonEvent="NextMonth" PreviousButtonEvent="PreviousMonth">
+        <CalendarButtonsLeft>
+            @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
+            <CalendarView DisplayName="Calendario Icon" CSSClass="active btn"></CalendarView>
+            <CalendarView Option="View.HorizontalMonth" DisplayName="Colab Icon" Event="CreateView" CSSClass="btn"></CalendarView>
+        </CalendarButtonsLeft>
+        <CalendarButtons>
+            @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
+            <CalendarView Option="View.HorizontalMonth" DisplayName="Mês" Event="CreateView" CSSClass="active btn"></CalendarView>
+            <CalendarView Option="View.HorizontalFullYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
+        </CalendarButtons>
+    </CalendarHeader>
     <div class="calendar-week-day">
-        <div class="calendar-week-day-child">Dom</div>
-        <div class="calendar-week-day-child">Seg</div>
-        <div class="calendar-week-day-child">Ter</div>
-        <div class="calendar-week-day-child">Qua</div>
-        <div class="calendar-week-day-child">Qui</div>
-        <div class="calendar-week-day-child">Sex</div>
-        <div class="calendar-week-day-child">Sáb</div>
+        <div class="calendar-week-day-child">Domingo</div>
+        <div class="calendar-week-day-child">Segunda</div>
+        <div class="calendar-week-day-child">Terça</div>
+        <div class="calendar-week-day-child">Quarta</div>
+        <div class="calendar-week-day-child">Quinta</div>
+        <div class="calendar-week-day-child">Sexta</div>
+        <div class="calendar-week-day-child">Sábado</div>
     </div>
         <CalendarBody Type="CalendarBody.calendar.Month" WeekData="Weeks" EventData="Events" MonthDayClickMethod="DayClicked" EventClickMethod="EventDetails"></CalendarBody>
 </div>

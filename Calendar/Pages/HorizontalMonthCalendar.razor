@@ -5,6 +5,12 @@
 
     <div class="mother-of-all-divs  @(hide ? "d-none" : "d-show")">
         <CalendarHeader CSSClass="calendar-header2" DateValue="@MonthYear" PreviousButtonEvent="PreviousMonth" NextButtonEvent="NextMonth">
+            <CalendarButtonsLeft>
+                @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
+                <CalendarView Option="View.HorizontalYear" DisplayName="Horizontal Year Calendar" Event="CreateView"></CalendarView>
+                <CalendarView Option="View.HorizontalFullYear" DisplayName="Horizontal Full Year Calendar" Event="CreateView"></CalendarView>
+                <CalendarView Option="View.Month" DisplayName="Month Calendar" Event="CreateView"></CalendarView>
+            </CalendarButtonsLeft>
             <CalendarButtons>
                 @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
                 <CalendarView Option="View.HorizontalYear" DisplayName="Horizontal Year Calendar" Event="CreateView"></CalendarView>

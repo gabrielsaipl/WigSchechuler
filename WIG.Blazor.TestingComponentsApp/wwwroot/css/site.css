@@ -2,6 +2,7 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color:#f7f7f7;
 }
 
 h1:focus {
@@ -97,7 +98,6 @@ a, .btn-link {
 }
 /* For the names of the days of the week */
 .calendar-week-day {
-    height: 107px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     align-content: center;
@@ -111,14 +111,7 @@ a, .btn-link {
 /* -- */
 /* for the actual days of the week and weeks*/
 
-.week {
-    justify-content: space-between;
-    height: 110px;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    align-content: center;
-    text-align: center;
-}
+
 
 .day:hover {
     background-color: #eeeeee;

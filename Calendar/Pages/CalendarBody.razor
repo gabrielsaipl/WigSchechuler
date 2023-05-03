@@ -8,48 +8,65 @@
         @foreach (var week in WeekData)
         {
             <div class="week">
-                @foreach (var day in week.Days)
-                {
-                    <div class="day @day.Class @(day.IsCurrentDay ? "current-day" : "")" @onclick=@(()=>{Op = 1;dayy = day; dayclick();})>
-                        @day.DayNumber
+                <div class="days">
+                    @foreach (var day in week.Days)
+                    {
+                        <div class="day @day.Class @(day.IsCurrentDay ? "current-day" : "")" @onclick=@(()=>{Op = 1;dayy = day; dayclick();})>
+                            @day.DayNumber
+                           
+                        </div>
+
+                        
+
+                        numberOfDays = 0;
+                        increment++;
+                    }
+                </div>
+                <div class="appointments">
+                    @foreach (var day in week.Days)
+                    {
+
                         @foreach (var e in eventStored)
                         {
                             for (int i = 0; i < 100; i++)
                             {
                                 if (identifier[i] == e.StartDate.Date.Day && counter[i] > 0 && e.StartDate.Date.Day != day.Date.Day)
                                 {
-                                    <div class="event-count" @onclick:stopPropagation="true" @onclick=@(()=>{eve = e; eventclick();})>@e.Title</div>
+
+                                    @* !!!!  TO DO: START, END AND ORDER DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
+                                    <div class="appointment" style=" --start: 0; --end: 2; --order: 1; background-color: orange;" @onclick:stopPropagation="true" @onclick=@(()=>{eve = e; eventclick();})>@e.Title</div>
                                     counter[i] = counter[i] - 1;
+
                                 }
                             }
                         }
                         @foreach (var ev in EventData)
                         {
                             @*if (ev.SelectedDay.Date.Month == day.Date.Month && ev.SelectedDay.Date.Day == day.Date.Day)
-                            {
-                                    <div class="event-count" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
-                            }
-                            else if (eventStored != ev && numberOfDays >= 0)
-                            {
-                                <div class="event-count" @onclick:stopPropagation="true" @onclick=@(()=>{eve = eventStored; eventclick();})>@eventStored.Title</div>
-                                numberOfDays--;
-                            }
-                            else if (numberOfDays == 0)
-                            {
-                                numberOfDays = -1;
-                                eventStored = new Event();
-                            }
+                {
+                        <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
+                }
+                else if (eventStored != ev && numberOfDays >= 0)
+                {
+                    <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = eventStored; eventclick();})>@eventStored.Title</div>
+                    numberOfDays--;
+                }
+                else if (numberOfDays == 0)
+                {
+                    numberOfDays = -1;
+                    eventStored = new Event();
+                }
 
-                            if (ev.StartDate != ev.EndDate && ev.StartDate.Date.Day == day.Date.Day && ev.StartDate.Date.Month == day.Date.Month)
-                            {
-                                TimeSpan duration = ev.EndDate - ev.StartDate;
-                                numberOfDays = duration.Days;
-                                eventStored = ev;
-                                <div class="event-count" @onclick:stopPropagation="true" @onclick=@(()=>{eve = eventStored; eventclick();})>@eventStored.Title</div>
-                                numberOfDays--;
-                            }*@
-                            
-                            
+                if (ev.StartDate != ev.EndDate && ev.StartDate.Date.Day == day.Date.Day && ev.StartDate.Date.Month == day.Date.Month)
+                {
+                    TimeSpan duration = ev.EndDate - ev.StartDate;
+                    numberOfDays = duration.Days;
+                    eventStored = ev;
+                    <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = eventStored; eventclick();})>@eventStored.Title</div>
+                    numberOfDays--;
+                }*@
+
+
                             bool exists = false;
                             if (ev.StartDate.Date.Day == day.Date.Day && ev.StartDate.Date.Month == day.Date.Month)
                             {
@@ -71,25 +88,22 @@
                                             eventStored.Add(ev);
                                             identifier[increment] = ev.StartDate.Date.Day;
                                             counter[increment] = numberOfDays;
-                                            <div class="event-count" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
+                                            <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
                                         }
-                                        
+
                                     }
                                 }
                                 else
                                 {
-                                    <div class="event-count" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
+                                    @* !!!!  TO DO: START, END AND ORDER DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
+                                    <div class="appointment" style=" --start: 0; --end: 6; --order: 2; background-color: green;" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
                                 }
                             }
-                            
-                                
+
 
                         }
-                    </div>
-
-                    numberOfDays = 0;
-                    increment++;
-                }
+                    }
+                </div>
             </div>
         }
     </div>
@@ -157,7 +171,7 @@ else if (Type == calendar.HorizontalMonth)
                                     {
                                         if (ev.StartDate.Day == date.Day && ev.StartDate.Month == date.Month && ev.StartDate.Year == date.Year)
                                         {
-                                            <div class="event-count2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
+                                            <div class="appointment2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
                                         }
                                     }
                                 }*@
@@ -167,7 +181,7 @@ else if (Type == calendar.HorizontalMonth)
                                     {
                                         if (identifier[k] == e.StartDate.Date.Day && counter[k] > 0 && e.StartDate.Date.Day != j && e.EventResource == i)
                                         {
-                                            <div class="event-count2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = e; eventclick();})>@e.Title</div>
+                                            <div class="appointment2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = e; eventclick();})>@e.Title</div>
                                             counter[k] = counter[k] - 1;
                                         }
                                     }
@@ -195,14 +209,14 @@ else if (Type == calendar.HorizontalMonth)
                                                     eventStored.Add(ev);
                                                     identifier[increment] = ev.StartDate.Date.Day;
                                                     counter[increment] = numberOfDays;
-                                                    <div class="event-count2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
+                                                    <div class="appointment2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
                                                 }
 
                                             }
                                         }
                                         else
                                         {
-                                            <div class="event-count2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
+                                            <div class="appointment2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
                                         }
                                     }
                                 }
@@ -272,7 +286,7 @@ else if (Type == calendar.HorizontalYear)
                                     {
                                         if (ev.StartDate.Month == date.Month && ev.StartDate.Year == date.Year)
                                         {
-                                            <div class="event-count2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
+                                            <div class="appointment2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
                                         }
                                     }
                                 }
@@ -364,7 +378,7 @@ else if (Type == calendar.HorizontalFullYear)
                                         {
                                             if (ev.StartDate.Day == date.Day && ev.StartDate.Month == date.Month && ev.StartDate.Year == date.Year)
                                             {
-                                                <div class="event-count2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
+                                                <div class="appointment2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
                                             }
                                         }
                                     }
@@ -375,7 +389,7 @@ else if (Type == calendar.HorizontalFullYear)
                                         {
                                             if (identifier[j] == e.StartDate.Date.Day && counter[j] > 0 && e.StartDate.Date.Day != k && e.EventResource == i)
                                             {
-                                                <div class="event-count2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = e; eventclick();})>@e.Title</div>
+                                                <div class="appointment2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = e; eventclick();})>@e.Title</div>
                                                 counter[j] = counter[j] - 1;
                                             }
                                         }
@@ -403,14 +417,14 @@ else if (Type == calendar.HorizontalFullYear)
                                                         eventStored.Add(ev);
                                                         identifier[increment] = ev.StartDate.Date.Day;
                                                         counter[increment] = numberOfDays;
-                                                        <div class="event-count2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
+                                                        <div class="appointment2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
                                                     }
 
                                                 }
                                             }
                                             else
                                             {
-                                                <div class="event-count2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
+                                                <div class="appointment2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
                                             }
                                         }
                                     }

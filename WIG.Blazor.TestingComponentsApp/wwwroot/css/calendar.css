@@ -1,0 +1,227 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --brand-primary: #88B97C;
+    --brand-primary-light: scale-color($brand-primary, $lightness: +70%);
+    --brand-secondary: #423E3E;
+    --body-color: #252526;
+    --brand-font-family: 'Montserrat', sans-serif;
+    --week-day-text-color: #A3A6B4;
+
+    /* Text Size */
+    --text-size-1: 3em ;
+    --text-size--2: 2.5em ;
+    --text-size-3: 2em ;
+    --text-size-4: 1.5em ;
+    --text-size-5: 1.25em ;
+    --text-size-6: 1em ;
+    --text-size-7: 0.875em ;
+    --text-size-8: 0.75em ;
+    --text-size-9: 0.625em ;
+
+    /* Text Weight */
+    --weight-thin: 100;
+    --weight-extralight: 200;
+    --weight-light: 300;
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-extrabold: 800;
+    --weight-black: 900;
+}
+
+.calendar {
+    font-family: var(--brand-font-family);
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    background-color: #fff;
+}
+.calendar-header{
+    border:none;
+}
+.calendar-header > .btn-group > .btn {
+    background-color: #ddd;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+.calendar-header > .btn-group > .btn.active {
+    background-color: var( --brand-primary);
+}
+.calendar-month {
+    text-transform: capitalize;
+    color: #4D4F5C;
+    font-weight: var(--weight-regular);
+}
+.calendar-week-day-child {
+    border: none;
+    background-color: #F5F6FA;
+    color: var(--week-day-text-color);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    font-size: var(--text-size-8);
+}
+.day {
+    font-size: 14px;
+    border: 0.7px solid #EAF0F4;
+    border-block-color: #EAF0F4;
+}
+.calendar-prev,
+.calendar-next {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    fill: black;
+}
+
+ 
+
+﻿.calendar {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+
+    --background-color: white;
+    background-color: var(--background-color);
+}
+
+.calendar > .header > .actions {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+}
+.calendar > .header > .actions > .navigation > .selected-month {
+    width: 160px;
+    display: inline-block;
+    text-align: center;
+    font-size: 1.25rem;
+    vertical-align: middle;
+}
+.calendar > .header > .actions .btn {
+    background-color: #ddd;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+.calendar > .header > .actions .btn:focus {
+    outline: none;
+}
+
+.calendar > .header > .actions .icon-btn {
+    background: initial;
+    border-radius: 50%;
+}
+.calendar > .header > .actions .icon-btn:hover {
+    background-color: #ddd;
+}
+.calendar > .header > .actions .icon-btn > svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    font-size: 1.5rem;
+    margin: -6px;
+}
+
+.calendar > .calendar-body {
+    display: flex;
+    flex-direction: column;
+}
+.calendar > .calendar-body > .week {
+    position: relative;
+}
+.calendar > .calendar-body > div:not(:last-of-type) {
+    border-bottom: 1px solid #eee;
+}
+.calendar > .calendar-body > .week > .days {
+    display: flex;
+    justify-content: space-around;
+    height: max(8.313rem, calc(1.5rem + 5px + 8px + var(--maxAppointments) * 1.2rem));
+}
+
+.calendar > .calendar-body > .week.header {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #eee;
+}
+
+.calendar > .calendar-body > .week.header > .day-of-month {
+    background-color: white;
+    text-align: center;
+    font-weight: bold;
+    flex: 1;
+}
+.calendar > .calendar-body > .week.header > .day-of-month > .short-dayname {
+    display: none;
+}
+.calendar > .calendar-body > .week.header > div:not(:last-of-type) {
+    border-right: 1px solid #eee;
+}
+
+.calendar > .calendar-body > .week > .days > .day {
+    background-color: white;
+    flex: 1;
+    text-align: right;
+    padding: 0.5rem;
+}
+
+.calendar > .calendar-body > .week > .days > div:not(:last-of-type) {
+    border-right: 1px solid #eee;
+}
+
+.calendar > .calendar-body > .week > .days > .day > span {
+    margin-top: 5px;
+    font-size: .9rem;
+    font-size: .75rem;
+    display: inline-block;
+
+    background-color: inherit;
+    text-align: center;
+    border-radius: 50%;
+    --size: 1.5rem;
+    min-width: var(--size);
+    height: var(--size);
+    line-height: var(--size);
+}
+
+.calendar > .calendar-body > .week > .days > .day.diff-month {
+    background-color: #f7f7f7;
+    color: #ababab;
+}
+
+.calendar > .calendar-body > .week > .appointments > .appointment {
+    position: absolute;
+    left: calc(var(--start) / 7 * 100%);
+    top: max(10px, calc(15px + (var(--order) * 1.2rem)));
+    border-radius: 2px;
+    margin-left: 2px;
+    width: calc((var(--end) - var(--start) + 1) / 7 * 100% - 4px);
+    padding-left: 4px;
+    font-size: .75rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.calendar > .calendar-body > .week > .appointments > .appointment.new-appointment {
+    top: 30px;
+    z-index: 1;
+    box-shadow: 3px 6px 6px rgb(0 0 0 / 50%);
+}
+.calendar > .calendar-body > .week > .appointments > .appointment-timed {
+    background-color: var(--background-color);
+    width: calc(100% / 7 - 4px);
+}
+.calendar > .calendar-body > .week > .appointments > .appointment-timed.new-appointment {
+    border: 1px solid #eee;
+}
