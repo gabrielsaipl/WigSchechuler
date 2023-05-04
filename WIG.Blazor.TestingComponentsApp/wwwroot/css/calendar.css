@@ -246,16 +246,19 @@
     z-index: 1;
     overflow: scroll;
     transition: opacity 50ms ease-in;
-    width: 1140px;
+    width: calc(100vw - 21.5rem);
 }
-
+.calendar-scroll-x > table > tbody > tr > th,
+.calendar-scroll-x > table > tbody > tr > td {
+    padding: 0;
+}
 .calendar-scroll-x > table > tbody > tr > th {
     position: -webkit-sticky;
     position: sticky;
     left: 0;
     z-index: 2;
     background: white;
-    box-shadow: 0 0 1px #e2e2e5;
+    border-bottom: 1px solid #EAF0F4;
 }
 .calendar-scroll-x > table > thead > tr > th {
     position: -webkit-sticky;
@@ -272,20 +275,20 @@
     font-weight: 500;
     color: #515164;
 }
-    .calendar-scroll-x > table > thead > tr > th:first-of-type {
-        position: -webkit-sticky;
-        position: sticky;
-        left: 0;
-        top: 0;
-        z-index: 5;
-        background: #F4F4F5;
-        align-items: center;
-        display: flex;
-        padding: 15px;
-        height: 50px;
-        min-width: 225px;
-        box-shadow: 0 0 1px #e2e2e5;
-    }
+.calendar-scroll-x > table > thead > tr > th:first-of-type {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    background: #F4F4F5;
+    align-items: center;
+    display: flex;
+    padding: 15px;
+    height: 50px;
+    min-width: 225px;
+    box-shadow: 0 0 1px #e2e2e5;
+}
 .calendar-scroll-x > table > thead > tr > th > .day {
     align-items: center;
     display: flex;
@@ -307,7 +310,6 @@
     min-width: 40px;
     line-height: 2px;
     text-align: center;
-    font-weight: 500;
-    color: #515164;
-    box-shadow: 0 0 1px #e2e2e5;
+    border: 1px solid #EAF0F4;
+    margin: 0;
 }
