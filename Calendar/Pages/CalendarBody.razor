@@ -131,22 +131,22 @@ else if (Type == calendar.HorizontalMonth)
                         @Resources
                         @if (Resources == null)
                         {
+
                             @foreach (var ResourceData in ResourceData)
                             {
                                 <tr>
                                     <th>
                                         @ResourceData.Text @ResourceData.Id
                                     </th>
-
-
-                                    @* !!!!! TO DO: dinamic days !!!!!  *@
-                                    <td><div class="resource-day"></div></td>
+                                    @foreach (var day in DayData)
+                                    {
+                                        <td><div class="resource-day"></div></td>
+                                    }
                                 </tr>
+                                    }
                             }
 
-                        }
-
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
   
