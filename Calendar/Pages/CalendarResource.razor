@@ -1,11 +1,15 @@
-﻿<div class=@CSSClass>
-@foreach (var item in DataSource)
+﻿@foreach (var item in DataSource)
 {
-    <div class="@ResourceCSSClass">
-        @item.Text @item.Id
-    </div>
+    <tr>
+        <th>
+            @item.Text @item.Id
+        </th>
+
+        <td></td>
+
+    </tr>
 }
-</div>
+    
 @code {
     [Parameter]
     public List<ResourceData> DataSource { get; set; } = new List<ResourceData>();

@@ -3,19 +3,17 @@
 @if (!nextView)
 {
 
-    <div class="mother-of-all-divs  @(hide ? "d-none" : "d-show")">
-        <CalendarHeader CSSClass="calendar-header2" DateValue="@MonthYear" PreviousButtonEvent="PreviousMonth" NextButtonEvent="NextMonth">
+    <div class="calendar  @(hide ? "d-none" : "d-show")">
+        <CalendarHeader CSSClass="calendar-header" DateValue="@MonthYear" PreviousButtonEvent="PreviousMonth" NextButtonEvent="NextMonth">
             <CalendarButtonsLeft>
                 @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
-                <CalendarView Option="View.HorizontalYear" DisplayName="Horizontal Year Calendar" Event="CreateView"></CalendarView>
-                <CalendarView Option="View.HorizontalFullYear" DisplayName="Horizontal Full Year Calendar" Event="CreateView"></CalendarView>
-                <CalendarView Option="View.Month" DisplayName="Month Calendar" Event="CreateView"></CalendarView>
+                <CalendarView Option="View.Month" DisplayName="Calendario Icon" CSSClass="btn" Event="CreateView"></CalendarView>
+                <CalendarView DisplayName="Colab Icon" Event="CreateView" CSSClass="active btn"></CalendarView>
             </CalendarButtonsLeft>
             <CalendarButtons>
                 @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
-                <CalendarView Option="View.HorizontalYear" DisplayName="Horizontal Year Calendar" Event="CreateView"></CalendarView>
-                <CalendarView Option="View.HorizontalFullYear" DisplayName="Horizontal Full Year Calendar" Event="CreateView"></CalendarView>
-                <CalendarView Option="View.Month" DisplayName="Month Calendar" Event="CreateView"></CalendarView>
+                <CalendarView Option="View.HorizontalMonth" DisplayName="Mês" Event="CreateView" CSSClass="active btn"></CalendarView>
+                <CalendarView Option="View.HorizontalFullYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
             </CalendarButtons>
         </CalendarHeader>
         <CalendarBody Type="CalendarBody.calendar.HorizontalMonth" ResourceData="Resourcedata" CurrentMonthValue="_currentMonth" DayData="Days" EventData="Events" HorizontalMonthDayClickMethod="DayClicked" EventClickMethod="EventDetails">

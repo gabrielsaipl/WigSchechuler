@@ -113,21 +113,6 @@ a, .btn-link {
 
 
 
-.day:hover {
-    background-color: #eeeeee;
-}
-
-.day {
-    height: 110px;
-    cursor: pointer;
-    vertical-align: top;
-    text-align: start;
-    padding: 3px;
-    font-size: 18px;
-    border-top: 1px solid;
-    border-block-color: green;
-}
-
 .current-day {
     background-color: lightblue;
 }
@@ -241,10 +226,6 @@ div.days-header div {
     height: 850px;
 }
 
-.days-header {
-    padding: 20px 5px 20px 0px;
-    height: 89px;
-}
 
 .new-section {
     white-space: normal !important;

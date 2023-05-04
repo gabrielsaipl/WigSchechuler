@@ -65,10 +65,18 @@
     text-transform: uppercase;
     font-size: var(--text-size-8);
 }
-.day {
+.calendar-body > .week > .days > .day {
     font-size: 14px;
     border: 0.7px solid #EAF0F4;
     border-block-color: #EAF0F4;
+    height: 110px;
+    cursor: pointer;
+    vertical-align: top;
+    text-align: start;
+    padding: 3px;
+}
+.calendar-body > .week > .days > .day:hover {
+    background-color: #eeeeee;
 }
 .calendar-prev,
 .calendar-next {
@@ -224,4 +232,82 @@
 }
 .calendar > .calendar-body > .week > .appointments > .appointment-timed.new-appointment {
     border: 1px solid #eee;
+}
+
+
+.calendar-horizontal-month {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.calendar-scroll-x {
+    position: relative;
+    z-index: 1;
+    overflow: scroll;
+    transition: opacity 50ms ease-in;
+    width: 1140px;
+}
+
+.calendar-scroll-x > table > tbody > tr > th {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: white;
+    box-shadow: 0 0 1px #e2e2e5;
+}
+.calendar-scroll-x > table > thead > tr > th {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    box-shadow: 0 0 1px #e2e2e5;
+    background: #F4F4F5;
+    padding: 12px 0;
+    height: 50px;
+    min-width: 40px;
+    line-height: 2px;
+    text-align: center;
+    font-weight: 500;
+    color: #515164;
+}
+    .calendar-scroll-x > table > thead > tr > th:first-of-type {
+        position: -webkit-sticky;
+        position: sticky;
+        left: 0;
+        top: 0;
+        z-index: 5;
+        background: #F4F4F5;
+        align-items: center;
+        display: flex;
+        padding: 15px;
+        height: 50px;
+        min-width: 225px;
+        box-shadow: 0 0 1px #e2e2e5;
+    }
+.calendar-scroll-x > table > thead > tr > th > .day {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+}
+.calendar-scroll-x > table > thead > tr > th > .current-day {
+    background: var( --brand-primary);
+    border-radius: 40px;
+    color: #fff;
+    font-weight: 600;
+    margin: 0 7px;
+}
+.resource-day {
+    background: white;
+    padding: 12px 0;
+    height: 50px;
+    min-width: 40px;
+    line-height: 2px;
+    text-align: center;
+    font-weight: 500;
+    color: #515164;
+    box-shadow: 0 0 1px #e2e2e5;
 }

@@ -83,7 +83,7 @@ namespace Calendar.Pages
                 {
                     Date = new DateTime(_currentMonth.Year, _currentMonth.Month, currentDay),
                     DayNumber = currentDay,
-                    Class = "day2"
+                    Class = "day"
                 };
                 Days.Add(day);
 
