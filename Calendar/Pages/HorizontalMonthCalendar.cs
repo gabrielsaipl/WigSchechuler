@@ -61,7 +61,7 @@ namespace Calendar.Pages
 
             //initializing variables for the calendar the events and the calendar
             _currentMonth = DateTime.Today;
-            InitializeEvents();
+            //InitializeEvents();
             GenerateCalendar();
         }
 
@@ -154,7 +154,7 @@ namespace Calendar.Pages
         private void InitializeEvents()
         {
 
-            /*var event1 = new Event
+            var event1 = new Event
             {
                 Title = "evento1",
                 StartDate = new DateTime(2023, 4, 1),
@@ -200,7 +200,7 @@ namespace Calendar.Pages
             foreach (var evess in Evess)
             {
                 Events.Add(evess);
-            }*/
+            }
 
         }
     }

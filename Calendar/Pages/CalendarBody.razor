@@ -1,4 +1,5 @@
-﻿@if (Type == calendar.Month)
+﻿@inject IJSRuntime JS
+@if (Type == calendar.Month)
 {
     int numberOfDays = 0, increment = 0;
     int[] counter = new int[100];
@@ -6,70 +7,57 @@
     List<Event> eventStored = new List<Event>();
     <div class="calendar-body">
         @foreach (var week in WeekData)
-        {
+            {
+            int DayOfWeek = 0;
+            bool IsFirstDay = true;
+            int EventStartWidth = 0;
+            int EventEndWidth = 0;
             <div class="week">
                 <div class="days">
                     @foreach (var day in week.Days)
                     {
                         <div class="day @day.Class @(day.IsCurrentDay ? "current-day" : "")" @onclick=@(()=>{Op = 1;dayy = day; dayclick();})>
-                            @day.DayNumber
-                           
+                            @day.DayNumber 
                         </div>
-
-                        
-
-                        numberOfDays = 0;
-                        increment++;
                     }
                 </div>
                 <div class="appointments">
+
                     @foreach (var day in week.Days)
                     {
-
+                        if (IsFirstDay)
+                        {
+                            foreach (var e in eventStored)
+                            {
+                                if (e.EndDate.Date > day.Date)
+                                {
+                                    EventStartWidth = DayOfWeek;
+                                }
+                            }
+                        }
                         @foreach (var e in eventStored)
                         {
                             for (int i = 0; i < 100; i++)
                             {
                                 if (identifier[i] == e.StartDate.Date.Day && counter[i] > 0 && e.StartDate.Date.Day != day.Date.Day)
                                 {
-
-                                    @* !!!!  TO DO: START, END AND ORDER DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
-                                    <div class="appointment" style=" --start: 0; --end: 2; --order: 1; background-color: orange;" @onclick:stopPropagation="true" @onclick=@(()=>{eve = e; eventclick();})>@e.Title</div>
                                     counter[i] = counter[i] - 1;
+                                    if (IsFirstDay)
+                                    {
+                                        EventEndWidth = 0;
+                                    }
+                                    else EventEndWidth += 1;
+
 
                                 }
                             }
                         }
                         @foreach (var ev in EventData)
                         {
-                            @*if (ev.SelectedDay.Date.Month == day.Date.Month && ev.SelectedDay.Date.Day == day.Date.Day)
-                {
-                        <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
-                }
-                else if (eventStored != ev && numberOfDays >= 0)
-                {
-                    <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = eventStored; eventclick();})>@eventStored.Title</div>
-                    numberOfDays--;
-                }
-                else if (numberOfDays == 0)
-                {
-                    numberOfDays = -1;
-                    eventStored = new Event();
-                }
-
-                if (ev.StartDate != ev.EndDate && ev.StartDate.Date.Day == day.Date.Day && ev.StartDate.Date.Month == day.Date.Month)
-                {
-                    TimeSpan duration = ev.EndDate - ev.StartDate;
-                    numberOfDays = duration.Days;
-                    eventStored = ev;
-                    <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = eventStored; eventclick();})>@eventStored.Title</div>
-                    numberOfDays--;
-                }*@
-
-
                             bool exists = false;
                             if (ev.StartDate.Date.Day == day.Date.Day && ev.StartDate.Date.Month == day.Date.Month)
                             {
+                                //Event with different start and end dates
                                 if (ev.StartDate.Date.Day != ev.EndDate.Date.Day)
                                 {
                                     TimeSpan duration = ev.EndDate - ev.StartDate;
@@ -88,20 +76,40 @@
                                             eventStored.Add(ev);
                                             identifier[increment] = ev.StartDate.Date.Day;
                                             counter[increment] = numberOfDays;
-                                            <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
+                                            EventStartWidth = DayOfWeek;
+                                            EventEndWidth = EventStartWidth;
                                         }
 
                                     }
                                 }
+                                //Event With same start and end date
                                 else
                                 {
-                                    @* !!!!  TO DO: START, END AND ORDER DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
-                                    <div class="appointment" style=" --start: 0; --end: 6; --order: 2; background-color: green;" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
+                                    @* !!!!  TO DO: ORDER USING DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
+                                    <div class="appointment" style=" --start: 0; --end: 0; --order: 1; background-color: green;" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
                                 }
                             }
 
-
                         }
+                        numberOfDays = 0;
+                        increment++;
+                        if (IsFirstDay)
+                        {
+                            EventEndWidth = 0;
+                        }
+                        DayOfWeek++;
+                        if (DayOfWeek > 6)
+                        {
+                            if (EventStartWidth == 0 && EventEndWidth == 0)
+                            {
+                            }
+                            else
+                            {
+                                @* !!!!  TO DO: ORDER USING DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
+                                <div class="appointment" style=" --start: @EventStartWidth; --end: @EventEndWidth; --order: 1; background-color: green;">example</div>
+                            }
+                        }
+                        IsFirstDay = false;
                     }
                 </div>
             </div>
@@ -127,7 +135,6 @@ else if (Type == calendar.HorizontalMonth)
 
                     <tbody>
 
-                        <!-- Componente para os recursos -->
                         @Resources
                         @if (Resources == null)
                         {
@@ -143,18 +150,15 @@ else if (Type == calendar.HorizontalMonth)
                                         <td><div class="resource-day"></div></td>
                                     }
                                 </tr>
-                                    }
                             }
+                        }
 
                         </tbody>
                 </table>
             </div>
   
-
-
-
     @* old version *@
-    <div style="width:100%; display:none">
+ @*   <div style="width:100%; display:none">
         <!-- Componente para os recursos -->
         @Resources
         @if (Resources == null)
@@ -195,7 +199,8 @@ else if (Type == calendar.HorizontalMonth)
                         resourse = i;
                         var date = new DateTime(CurrentMonthValue.Year, CurrentMonthValue.Month, day);
                         <div class="grid-column" id="@resourse @day" @onclick=@(()=>{Op = 2;dayvalue = day; resourcevalue = resourse; dayclick();})>
-                            @*@foreach (var ev in EventData)
+                                Old Event Logic -
+                                @foreach (var ev in EventData)
                                 {
                                     if (ev.EventResource == resourse)
                                     {
@@ -204,7 +209,7 @@ else if (Type == calendar.HorizontalMonth)
                                             <div class="appointment2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
                                         }
                                     }
-                                }*@
+                                } -
                             @foreach (var e in eventStored)
                             {
                                 for (int k = 0; k < 250; k++)
@@ -259,7 +264,7 @@ else if (Type == calendar.HorizontalMonth)
             }
         </div>
     </div>
-
+    *@
 </div>
 }
 

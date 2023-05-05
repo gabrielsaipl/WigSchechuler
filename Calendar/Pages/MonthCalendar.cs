@@ -51,7 +51,7 @@ namespace Calendar.Pages
             //initializing variables for the calendar the events and the calendar
             DateSelected = DateTime.Today;
             _currentMonth = DateTime.Today;
-            InitializeEvents();
+            //InitializeEvents();
             GenerateCalendar();
 
         }

@@ -1,24 +1,12 @@
 ﻿@page "/Calendar"
 @using Calendar.Pages;
-
 <PageTitle>Calendar</PageTitle>
-@*<button class="btn btn-primary" @onclick="ChangeView">Alterar Vista</button>*@
-@*<Calendar.Pages.BaseCalendar horizontalMonth="horizontalmonth" verticalMonth="verticalmonth" horizontalYear="horizontalyear" horizontalMonthExtented="horizontalmonthextended"></Calendar.Pages.BaseCalendar>*@
-@*<Calendar.Pages.CalendarHeader DateValue="2023"  >
-    <CalendarButtons>
-        <Calendar.Pages.CalendarView Option="View.Month" DisplayName="bom dia"></Calendar.Pages.CalendarView>
-    </CalendarButtons>
-</Calendar.Pages.CalendarHeader>
-<Calendar.Pages.CalendarBody Type="">
-
-</Calendar.Pages.CalendarBody>*@
-
 @*<HorizontalWeekYearCalendar Events="Events" data="Resources"></HorizontalWeekYearCalendar>*@
+@*<HorizontalMonthCalendar Events="Events" Resourcedata="Resources"></HorizontalMonthCalendar>*@
 <MonthCalendar Events="Events"></MonthCalendar>
-
 @code{
     public List<Event> Events { get; set; } = new List<Event>();
-    public List<ResourceData> Resources{ get; set; } = new List<ResourceData>();
+    public List<ResourceData> Resources { get; set; } = new List<ResourceData>();
 
     protected override void OnInitialized()
     {
@@ -26,19 +14,20 @@
         InitializeResources();
         base.OnInitialized();
     }
+    // Warning : Can only maintain one event with multiple days in the MonthCalendar \\
     private void InitializeEvents()
     {
 
         var event1 = new Event
-            {
-                Title = "Feriado",
-                StartDate = new DateTime(2023, 4, 1),
-                EndDate = new DateTime(2023, 4, 4),
-                Description = "Isto representa um evento criado pelo utilizador",
-                SelectedDay = new Day { Class = "day2", Date = new DateTime(2023, 4, 1), DayNumber = 1, IsOtherMonth = false },
-                EventResource = 1,
-            };
-        var event12 = new Event
+        {
+            Title = "Feriado",
+            StartDate = new DateTime(2023, 4, 7),
+            EndDate = new DateTime(2023, 4, 17),
+            Description = "Isto representa um evento criado pelo utilizador",
+            SelectedDay = new Day { Class = "day2", Date = new DateTime(2023, 4, 7), DayNumber = 7, IsOtherMonth = false },
+            EventResource = 1,
+        };
+        @*var event12 = new Event
             {
                 Title = "Feriado12",
                 StartDate = new DateTime(2023, 4, 3),
@@ -47,7 +36,7 @@
                 SelectedDay = new Day { Class = "day2", Date = new DateTime(2023, 4, 3), DayNumber = 3, IsOtherMonth = false },
                 EventResource = 1,
             };
-        var event2 = new Event
+            var event2 = new Event
             {
                 Title = "Aniversario",
                 StartDate = new DateTime(2023, 4, 3),
@@ -56,7 +45,7 @@
                 SelectedDay = new Day { Class = "day2", Date = new DateTime(2023, 4, 25), DayNumber = 25, IsOtherMonth = false },
                 EventResource = 2,
             };
-        var event3 = new Event
+            var event3 = new Event
             {
                 Title = "Celebracao",
                 StartDate = new DateTime(2023, 4, 4),
@@ -65,7 +54,7 @@
                 SelectedDay = new Day { Class = "day2", Date = new DateTime(2023, 5, 17), DayNumber = 17, IsOtherMonth = false },
                 EventResource = 7,
             };
-        var event4 = new Event
+            var event4 = new Event
             {
                 Title = "Feriado",
                 StartDate = new DateTime(2023, 5, 1),
@@ -74,7 +63,7 @@
                 SelectedDay = new Day { Class = "day2", Date = new DateTime(2023, 5, 1), DayNumber = 1, IsOtherMonth = false },
                 EventResource = 1,
             };
-        var event5 = new Event
+            var event5 = new Event
             {
                 Title = "Feriado",
                 StartDate = new DateTime(2023, 5, 1),
@@ -82,29 +71,29 @@
                 Description = "Isto representa um evento criado pelo utilizador",
                 SelectedDay = new Day { Class = "day2", Date = new DateTime(2023, 5, 1), DayNumber = 1, IsOtherMonth = false },
                 EventResource = 5,
-            };
-        var Evess = new List<Event> { event1, event2, event3, event4, event5, event12 };
-        foreach (var evess in Evess)
-        {
-            Events.Add(evess);
-        }
+            };*@
+        var Evess = new List<Event> { event1, @*event2, event3, event4, event5, event12 *@};
+                    foreach (var evess in Evess)
+                    {
+                        Events.Add(evess);
+                    }
 
-    }
-    private void InitializeResources()
-    {
-        var res1 = new ResourceData { Text = "Resource", Id = 1 };
-        var res2 = new ResourceData { Text = "Resource", Id = 2 };
-        var res3 = new ResourceData { Text = "Resource", Id = 3 };
-        var res4 = new ResourceData { Text = "Resource", Id = 4 };
-        var res5 = new ResourceData { Text = "Resource", Id = 5 };
-        var res6 = new ResourceData { Text = "Resource", Id = 6 };
-        var res7 = new ResourceData { Text = "Resource", Id = 7 };
-        var res8 = new ResourceData { Text = "Resource", Id = 8 };
-        var resc = new List<ResourceData> { res1, res2, res3, res4, res5, res6, res7, res8 };
-        foreach (var res in resc)
-        {
-            Resources.Add(res);
-        }
-    }
+                }
+                private void InitializeResources()
+                {
+                    var res1 = new ResourceData { Text = "Resource", Id = 1 };
+                    var res2 = new ResourceData { Text = "Resource", Id = 2 };
+                    var res3 = new ResourceData { Text = "Resource", Id = 3 };
+                    var res4 = new ResourceData { Text = "Resource", Id = 4 };
+                    var res5 = new ResourceData { Text = "Resource", Id = 5 };
+                    var res6 = new ResourceData { Text = "Resource", Id = 6 };
+                    var res7 = new ResourceData { Text = "Resource", Id = 7 };
+                    var res8 = new ResourceData { Text = "Resource", Id = 8 };
+                    var resc = new List<ResourceData> { res1, res2, res3, res4, res5, res6, res7, res8 };
+                    foreach (var res in resc)
+                    {
+                        Resources.Add(res);
+                    }
+                }
 
 }
