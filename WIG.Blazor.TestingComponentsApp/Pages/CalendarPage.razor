@@ -3,7 +3,8 @@
 <PageTitle>Calendar</PageTitle>
 @*<HorizontalWeekYearCalendar Events="Events" data="Resources"></HorizontalWeekYearCalendar>*@
 @*<HorizontalMonthCalendar Events="Events" Resourcedata="Resources"></HorizontalMonthCalendar>*@
-<MonthCalendar Events="Events"></MonthCalendar>
+<MonthCalendar Events="Events" Button="MonthCalendar.Option.HorizontalMonth" Button2="MonthCalendar.Option.HorizontalWeekYear"></MonthCalendar>
+
 @code{
     public List<Event> Events { get; set; } = new List<Event>();
     public List<ResourceData> Resources { get; set; } = new List<ResourceData>();
@@ -11,7 +12,7 @@
     protected override void OnInitialized()
     {
         InitializeEvents();
-        InitializeResources();
+        InitializeResources(); 
         base.OnInitialized();
     }
     // Warning : Can only maintain one event with multiple days in the MonthCalendar \\

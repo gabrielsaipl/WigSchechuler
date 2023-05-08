@@ -15,12 +15,27 @@ namespace Calendar.Pages
         private bool showPopup = false;
         private bool showDetails = false;
 
+        public enum Option
+        {
+            Month,
+            HorizontalMonth,
+            HorizontalYear,
+            HorizontalFullYear,
+            HorizontalWeekYear,
+        }
+
         //label for the month and year in the calendar header
         public string MonthYear => _currentMonth.ToString("MMMM yyyy");
 
         //list of events
         [Parameter]
         public List<Event> Events { get; set; } = new List<Event>();
+
+        [Parameter]
+        public Option Button { get; set; }
+
+        [Parameter]
+        public Option Button2{ get; set; }
 
         //bool to switch to the next calendar component
         private bool nextView { get; set; } = false;

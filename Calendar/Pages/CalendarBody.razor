@@ -139,15 +139,15 @@ else if (Type == calendar.HorizontalMonth)
                         @if (Resources == null)
                         {
 
-                            @foreach (var ResourceData in ResourceData)
+                            @foreach (var resource in ResourceData)
                             {
                                 <tr>
                                     <th>
-                                        @ResourceData.Text @ResourceData.Id
+                                        @resource.Text @resource.Id
                                     </th>
                                     @foreach (var day in DayData)
                                     {
-                                        <td><div class="resource-day"></div></td>
+                                        <td><div class="resource-day" @onclick=@(()=>{Op = 2;dayvalue = day.DayNumber; resourcevalue = resource.Id; dayclick();})></div></td>
                                     }
                                 </tr>
                             }
