@@ -145,13 +145,30 @@ else if (Type == calendar.HorizontalMonth)
                                     <th>
                                         @resource.Text @resource.Id
                                     </th>
+                                    
                                     @foreach (var day in DayData)
                                     {
-                                        <td><div class="resource-day" @onclick=@(()=>{Op = 2;dayvalue = day.DayNumber; resourcevalue = resource.Id; dayclick();})></div></td>
+                                        <td>
+                                            <div class="resource-day" @onclick=@(()=>{Op = 2;dayvalue = day.DayNumber; resourcevalue = resource.Id; dayclick();})>
+                                                @foreach (var ev in EventData)
+                                                {
+                                                    if (ev.EventResource == resource.Id)
+                                                    {
+                                                        if (ev.StartDate.Day == day.Date.Day && ev.StartDate.Month == day.Date.Month && ev.StartDate.Year == day.Date.Year)
+                                                        {
+                                                            <div class="appointment2" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>ex</div>
+                                                        }
+                                                    }
+                                                }
+                                            </div>
+                                        </td>
+                                        
                                     }
+                                   
                                 </tr>
                             }
-                        }
+                                
+                         }
 
                         </tbody>
                 </table>
