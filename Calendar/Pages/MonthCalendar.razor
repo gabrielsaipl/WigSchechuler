@@ -7,43 +7,18 @@
         <CalendarHeader DateValue="@MonthYear" NextButtonEvent="NextMonth" PreviousButtonEvent="PreviousMonth">
             <CalendarButtonsLeft>
                 @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
-
                 <CalendarView DisplayName="Calendario Icon" CSSClass="active btn"></CalendarView>
                 <CalendarView Option="View.HorizontalMonth" DisplayName="Colab Icon" Event="CreateView" CSSClass="btn"></CalendarView>
 
             </CalendarButtonsLeft>
             <CalendarButtons>
-                @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
-                @switch (Button)
-                {
-                    case Option.HorizontalMonth:
-                        <CalendarView Option="View.HorizontalMonth" DisplayName="Mês" Event="CreateView" CSSClass="active btn"></CalendarView>
-                        break;
-                    case Option.HorizontalYear:
-                        <CalendarView Option="View.HorizontalYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
-                        break;
-                    case Option.HorizontalFullYear:
-                        <CalendarView Option="View.HorizontalFullYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
-                        break;
-                    case Option.HorizontalWeekYear:
-                        <CalendarView Option="View.HorizontalWeekYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
-                        break;
-                }
-                @switch (Button2)
-                {
-                    case Option.HorizontalMonth:
-                        <CalendarView Option="View.HorizontalMonth" DisplayName="Mês" Event="CreateView" CSSClass="active btn"></CalendarView>
-                        break;
-                    case Option.HorizontalYear:
-                        <CalendarView Option="View.HorizontalYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
-                        break;
-                    case Option.HorizontalFullYear:
-                        <CalendarView Option="View.HorizontalFullYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
-                        break;
-                    case Option.HorizontalWeekYear:
-                        <CalendarView Option="View.HorizontalWeekYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
-                        break;
-                }
+                        <CalendarView Option="View.HorizontalMonth" DisplayName="MêsHoriz" Event="CreateView" CSSClass="active btn"></CalendarView>
+                       
+                        <CalendarView Option="View.HorizontalYear" DisplayName="AnoHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+                        
+                        <CalendarView Option="View.HorizontalFullYear" DisplayName="AnoInteiroHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+                        
+                        <CalendarView Option="View.HorizontalWeekYear" DisplayName="AnoSemanaHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
             </CalendarButtons>
         </CalendarHeader>
         <div class="calendar-week-day">

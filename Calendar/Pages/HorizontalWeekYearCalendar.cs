@@ -60,7 +60,7 @@ namespace Calendar.Pages
 
         //lista de recursos
         [Parameter]
-        public List<ResourceData> data { get; set; } = new List<ResourceData>();
+        public List<ResourceData> ResourceData { get; set; } = new List<ResourceData>();
 
         /* methods */
 

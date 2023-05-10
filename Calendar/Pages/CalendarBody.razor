@@ -85,7 +85,7 @@
                                 //Event With same start and end date
                                 else
                                 {
-                                    @* !!!!  TO DO: ORDER USING DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
+                                    @* !!!!  TO DO:START, END AND ORDER USING DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
                                     <div class="appointment" style=" --start: 0; --end: 0; --order: 1; background-color: green;" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick();})>@ev.Title</div>
                                 }
                             }

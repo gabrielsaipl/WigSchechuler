@@ -34,7 +34,7 @@ namespace Calendar.Pages
 
         //lista de recursos
         [Parameter]
-        public List<ResourceData> Resourcedata { get; set; } = new List<ResourceData> 
+        public List<ResourceData> ResourceData { get; set; } = new List<ResourceData> 
         { 
             new ResourceData{Text = "Resource", Id = 1},
             new ResourceData{Text = "Resource", Id = 2},

@@ -13,10 +13,15 @@
             <CalendarButtons>
                 @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
                 <CalendarView Option="View.Month" DisplayName="Mês" Event="CreateView" CSSClass="active btn"></CalendarView>
-                <CalendarView Option="View.HorizontalFullYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
+
+                <CalendarView Option="View.HorizontalYear" DisplayName="AnoHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+
+                <CalendarView Option="View.HorizontalFullYear" DisplayName="AnoInteiroHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+
+                <CalendarView Option="View.HorizontalWeekYear" DisplayName="AnoSemanaHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
             </CalendarButtons>
         </CalendarHeader>
-        <CalendarBody Type="CalendarBody.calendar.HorizontalMonth" ResourceData="Resourcedata" CurrentMonthValue="_currentMonth" DayData="Days" EventData="Events" HorizontalMonthDayClickMethod="DayClicked" EventClickMethod="EventDetails">
+        <CalendarBody Type="CalendarBody.calendar.HorizontalMonth" ResourceData="ResourceData" CurrentMonthValue="_currentMonth" DayData="Days" EventData="Events" HorizontalMonthDayClickMethod="DayClicked" EventClickMethod="EventDetails">
         </CalendarBody>
     </div>
 }
@@ -30,10 +35,10 @@
     <HorizontalYearCalendar></HorizontalYearCalendar>
 }
 
-            @*can turn this into a component*@
+@*can turn this into a component*@
 @if (hide == true)
 {
-    
+
     if (calendarSelected == 2)
     {
         showPopup = false;
@@ -51,6 +56,12 @@
         showPopup = false;
         showDetails = false;
         <MonthCalendar></MonthCalendar>
+    }
+    else if (calendarSelected == 5)
+    {
+        showPopup = false;
+        showDetails = false;
+        <HorizontalWeekYearCalendar></HorizontalWeekYearCalendar>
     }
 }
 
