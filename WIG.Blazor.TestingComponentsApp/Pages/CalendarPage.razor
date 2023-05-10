@@ -2,9 +2,10 @@
 @using Calendar.Pages;
 <PageTitle>Calendar</PageTitle>
 @*<HorizontalWeekYearCalendar Events="Events" data="Resources"></HorizontalWeekYearCalendar>*@
-@*<HorizontalMonthCalendar Events="Events" Resourcedata="Resources"></HorizontalMonthCalendar>*@
-<MonthCalendar Events="Events" Button="MonthCalendar.Option.HorizontalMonth" Button2="MonthCalendar.Option.HorizontalWeekYear"></MonthCalendar>
 
+@*<MonthCalendar Events="Events" Button="MonthCalendar.Option.HorizontalMonth" Button2="MonthCalendar.Option.HorizontalWeekYear"></MonthCalendar>*@
+@*<HorizontalMonthCalendar ResourceData="Resources"></HorizontalMonthCalendar>*@
+<WIGScheduler ResourceData="Resources" EventData="Events" CurrentView="WIGScheduler.View.Month"></WIGScheduler>
 @code{
     public List<Event> Events { get; set; } = new List<Event>();
     public List<ResourceData> Resources { get; set; } = new List<ResourceData>();
@@ -12,7 +13,7 @@
     protected override void OnInitialized()
     {
         InitializeEvents();
-        InitializeResources(); 
+        InitializeResources();
         base.OnInitialized();
     }
     // Warning : Can only maintain one event with multiple days in the MonthCalendar \\
@@ -22,10 +23,10 @@
         var event1 = new Event
         {
             Title = "Feriado",
-            StartDate = new DateTime(2023, 4, 7),
-            EndDate = new DateTime(2023, 4, 17),
+            StartDate = new DateTime(2023, 5, 7),
+            EndDate = new DateTime(2023, 5, 17),
             Description = "Isto representa um evento criado pelo utilizador",
-            SelectedDay = new Day { Class = "day2", Date = new DateTime(2023, 4, 7), DayNumber = 7, IsOtherMonth = false },
+            SelectedDay = new Day { Class = "day2", Date = new DateTime(2023, 5, 7), DayNumber = 7, IsOtherMonth = false },
             EventResource = 1,
         };
         @*var event12 = new Event
@@ -96,5 +97,4 @@
                         Resources.Add(res);
                     }
                 }
-
 }

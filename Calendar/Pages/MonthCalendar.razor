@@ -9,16 +9,17 @@
                 @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
                 <CalendarView DisplayName="Calendario Icon" CSSClass="active btn"></CalendarView>
                 <CalendarView Option="View.HorizontalMonth" DisplayName="Colab Icon" Event="CreateView" CSSClass="btn"></CalendarView>
-
             </CalendarButtonsLeft>
             <CalendarButtons>
-                        <CalendarView Option="View.HorizontalMonth" DisplayName="MêsHoriz" Event="CreateView" CSSClass="active btn"></CalendarView>
-                       
-                        <CalendarView Option="View.HorizontalYear" DisplayName="AnoHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
-                        
-                        <CalendarView Option="View.HorizontalFullYear" DisplayName="AnoInteiroHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
-                        
-                        <CalendarView Option="View.HorizontalWeekYear" DisplayName="AnoSemanaHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+                <CalendarView Option="CalendarView.View.current" DisplayName="Mês" Event="CreateView" CSSClass="active btn"></CalendarView>
+
+                <CalendarView Option="View.HorizontalMonth" DisplayName="MêsHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+
+                <CalendarView Option="View.HorizontalYear" DisplayName="AnoHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+
+                <CalendarView Option="View.HorizontalFullYear" DisplayName="AnoInteiroHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+
+                <CalendarView Option="View.HorizontalWeekYear" DisplayName="AnoSemanaHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
             </CalendarButtons>
         </CalendarHeader>
         <div class="calendar-week-day">
@@ -40,7 +41,7 @@
     showPopup = false;
     showDetails = false;
 
-    <HorizontalMonthCalendar></HorizontalMonthCalendar>
+    <HorizontalMonthCalendar Events="Events" ResourceData="ResourceData"></HorizontalMonthCalendar>
 }
 @*can turn this into a component*@
 @if (hide == true)
@@ -49,25 +50,25 @@
     {
         showPopup = false;
         showDetails = false;
-        <HorizontalMonthCalendar></HorizontalMonthCalendar>
+        <HorizontalMonthCalendar Events="Events" ResourceData="ResourceData"></HorizontalMonthCalendar>
     }
     else if (calendarSelected == 2)
     {
         showPopup = false;
         showDetails = false;
-        <HorizontalYearCalendar></HorizontalYearCalendar>
+        <HorizontalYearCalendar Events="Events" ResourceData="ResourceData"></HorizontalYearCalendar>
     }
     else if (calendarSelected == 3)
     {
         showPopup = false;
         showDetails = false;
-        <HorizontalFullYearCalendar></HorizontalFullYearCalendar>
+        <HorizontalFullYearCalendar Events="Events" ResourceData="ResourceData"></HorizontalFullYearCalendar>
     }
     else if (calendarSelected == 5)
     {
         showPopup = false;
         showDetails = false;
-        <HorizontalWeekYearCalendar></HorizontalWeekYearCalendar>
+        <HorizontalWeekYearCalendar Events="Events" ResourceData="ResourceData"></HorizontalWeekYearCalendar>
     }
 }
 

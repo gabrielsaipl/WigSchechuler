@@ -27,15 +27,14 @@ namespace Calendar.Pages
         //label for the month and year in the calendar header
         public string MonthYear => _currentMonth.ToString("MMMM yyyy");
 
+        [Parameter]
+        public RenderFragment<bool> Buttons { get; set; }
         //list of events
         [Parameter]
         public List<Event> Events { get; set; } = new List<Event>();
 
         [Parameter]
-        public Option Button { get; set; }
-
-        [Parameter]
-        public Option Button2{ get; set; }
+        public List<ResourceData> ResourceData { get; set; } = new List<ResourceData>();
 
         //bool to switch to the next calendar component
         private bool nextView { get; set; } = false;
@@ -46,7 +45,7 @@ namespace Calendar.Pages
         //represents the current month
         private DateTime _currentMonth;
 
-        private bool hide { get; set; } = false;
+        public bool hide { get; set; } = false;
 
         private int calendarSelected;
 

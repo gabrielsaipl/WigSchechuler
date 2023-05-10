@@ -18,7 +18,10 @@ else if (Option == View.HorizontalWeekYear)
 {
     <button class="@CSSClass" @onclick=@(()=>{calendar = 5; OpenView();})> @DisplayName </button>
 }
-
+else if (Option == View.current)
+{
+    <button class="@CSSClass"> @DisplayName </button>
+}
 
 @code {
     public enum View
@@ -28,6 +31,7 @@ else if (Option == View.HorizontalWeekYear)
         HorizontalYear,
         HorizontalFullYear,
         HorizontalWeekYear,
+        current,
     }
 
     [Parameter]

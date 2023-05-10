@@ -6,9 +6,15 @@
     <div class="mother-of-all-divs @(hide ? "d-none" : "d-show" )">
         <CalendarHeader CSSClass="calendar-header" DateValue="@Year" NextButtonEvent="NextYear" PreviousButtonEvent="PreviousYear">
             <CalendarButtons>
-                <CalendarView Option="View.Month" DisplayName="Month Calendar" Event="CreateView"></CalendarView>
-                <CalendarView Option="View.HorizontalMonth" DisplayName="Horizontal Month Calendar" Event="CreateView"></CalendarView>
-                <CalendarView Option="View.HorizontalYear" DisplayName="Horizontal Year Calendar" Event="CreateView"></CalendarView>
+                <CalendarView Option="CalendarView.View.Month" DisplayName="Mês" Event="CreateView" CSSClass="btn"></CalendarView>
+
+                <CalendarView Option="CalendarView.View.HorizontalMonth" DisplayName="MêsHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+
+                <CalendarView Option="View.HorizontalYear" DisplayName="AnoHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+
+                <CalendarView Option="CalendarView.View.current" DisplayName="AnoInteiroHoriz" Event="CreateView" CSSClass="active btn"></CalendarView>
+
+                <CalendarView Option="CalendarView.View.HorizontalWeekYear" DisplayName="AnoSemanaHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
             </CalendarButtons>
         </CalendarHeader>
         <CalendarBody Type="CalendarBody.calendar.HorizontalFullYear" MonthsList="@monthsOfYear" MonthData="Months" YearString="@Year" DayData="Days" ResourceData="ResourceData" CurrentMonthValue="@_currentMonth" EventData="Events" HorizontalFullYearDayClickMethod="DayClicked" EventClickMethod="EventDetails">
@@ -32,21 +38,28 @@
     {
         showPopup = false;
         showDetails = false;
-        <MonthCalendar></MonthCalendar>
+        <MonthCalendar Events="Events" ResourceData="ResourceData"></MonthCalendar>
     }
+    else if (calendarSelected == 5)
+    {
+        showPopup = false;
+        showDetails = false;
+        <HorizontalWeekYearCalendar Events="Events" ResourceData="ResourceData"></HorizontalWeekYearCalendar>
+    }
+
     else if (calendarSelected == 1)
     {
         showPopup = false;
         showDetails = false;
-        <HorizontalMonthCalendar></HorizontalMonthCalendar>
+        <HorizontalMonthCalendar Events="Events" ResourceData="ResourceData"></HorizontalMonthCalendar>
     }
     else if (calendarSelected == 2)
     {
         showPopup = false;
         showDetails = false;
-        <HorizontalYearCalendar></HorizontalYearCalendar>
+        <HorizontalYearCalendar Events="Events" ResourceData="ResourceData"></HorizontalYearCalendar>
     }
-    
+
 }
 
 <AddEventPopup ShowPopup="@showPopup" SelectedDay="@DaySelected" Resource="SelectedResource" OnEventAdded="HandleEventAdded" SelectedDate="DateSelected" />

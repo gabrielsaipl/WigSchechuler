@@ -1,13 +1,15 @@
 ﻿<div class="calendar2 @(hide ? "d-none" : "d-show")">
     <CalendarHeader NextButtonEvent="NextYear" PreviousButtonEvent="PreviousYear" DateValue="@Year" CSSClass="calendar-header">
         <CalendarButtons>
-            <CalendarView Option="CalendarView.View.Month" DisplayName="Mês" Event="CreateView" CSSClass="active btn"></CalendarView>
+            <CalendarView Option="CalendarView.View.Month" DisplayName="Mês" Event="CreateView" CSSClass="btn"></CalendarView>
 
             <CalendarView Option="CalendarView.View.HorizontalMonth" DisplayName="MêsHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
 
             <CalendarView Option="CalendarView.View.HorizontalYear" DisplayName="AnoHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
 
             <CalendarView Option="CalendarView.View.HorizontalFullYear" DisplayName="AnoInteiroHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+
+            <CalendarView Option="CalendarView.View.current" DisplayName="AnoSemanaHoriz" Event="CreateView" CSSClass="active btn"></CalendarView>
         </CalendarButtons>
     </CalendarHeader>
 
@@ -142,25 +144,25 @@
                 {
                     showPopup = false;
                     showDetails = false;
-        <HorizontalMonthCalendar></HorizontalMonthCalendar>
+        <HorizontalMonthCalendar Events="Events" ResourceData="ResourceData"></HorizontalMonthCalendar>
                 }
                 else if (calendarSelected == 2)
                 {
                     showPopup = false;
                     showDetails = false;
-        <HorizontalYearCalendar></HorizontalYearCalendar>
+        <HorizontalYearCalendar Events="Events" ResourceData="ResourceData"></HorizontalYearCalendar>
                 }
                 else if (calendarSelected == 3)
                 {
                     showPopup = false;
                     showDetails = false;
-        <HorizontalFullYearCalendar></HorizontalFullYearCalendar>
+        <HorizontalFullYearCalendar Events="Events" ResourceData="ResourceData"></HorizontalFullYearCalendar>
                 }
                 else if (calendarSelected == 4)
                 {
                     showPopup = false;
                     showDetails = false;
-        <MonthCalendar Button="MonthCalendar.Option.HorizontalMonth" Button2="MonthCalendar.Option.HorizontalWeekYear"></MonthCalendar>
+        <MonthCalendar Events="Events" ResourceData="ResourceData"></MonthCalendar>
                 }
             }
 
