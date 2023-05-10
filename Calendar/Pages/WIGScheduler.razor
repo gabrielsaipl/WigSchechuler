@@ -1,0 +1,56 @@
+﻿@switch (CurrentView)
+{
+    case View.Month:
+        <MonthCalendar Events="EventData" ResourceData="ResourceData">
+            <Buttons>
+                @context. = true;
+                @ScheduleViews
+            </Buttons>
+        </MonthCalendar>
+        break;
+
+    case View.HorizontalMonth:
+        <HorizontalMonthCalendar Events="EventData" ResourceData="ResourceData">
+
+        </HorizontalMonthCalendar>
+
+        break;
+    case View.HorizontalYear:
+        <HorizontalYearCalendar Events="EventData" ResourceData="ResourceData"></HorizontalYearCalendar>
+
+        break;
+    case View.HorizontalFullYear:
+        <HorizontalFullYearCalendar Events="EventData" ResourceData="ResourceData"></HorizontalFullYearCalendar>
+
+        break;
+    case View.HorizontalWeekYear:
+        <HorizontalWeekYearCalendar Events="EventData" ResourceData="ResourceData"></HorizontalWeekYearCalendar>
+
+        break;
+    case null:
+        <MonthCalendar Events="EventData" Resources="ResourceData"></MonthCalendar>
+
+        break;
+}
+@code {
+
+    public enum View
+    {
+        Month,
+        HorizontalMonth,
+        HorizontalYear,
+        HorizontalFullYear,
+        HorizontalWeekYear,
+    }
+
+    [Parameter]
+    public RenderFragment ScheduleViews { get; set; }
+    [Parameter]
+    public List<Event> EventData { get; set; }
+    [Parameter]
+    public List<ResourceData> ResourceData { get; set; }
+    [Parameter]
+    public View? CurrentView { get; set; }
+
+}
+
