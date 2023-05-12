@@ -13,7 +13,6 @@ namespace Calendar.Pages
         private DateTime DateSelected;
         private bool showPopup = false;
         private bool showDetails = false;
-
         public enum Option
         {
             Month,

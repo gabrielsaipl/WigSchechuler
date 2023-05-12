@@ -1,27 +1,29 @@
-﻿@page "/Calendar"
+﻿@page "/WIGScheduler"
 @using Calendar.Pages;
-<PageTitle>Calendar</PageTitle>
-@*<HorizontalWeekYearCalendar Events="Events" data="Resources"></HorizontalWeekYearCalendar>*@
+<PageTitle>WIGScheduler</PageTitle>
 
-@*<MonthCalendar Events="Events" Button="MonthCalendar.Option.HorizontalMonth" Button2="MonthCalendar.Option.HorizontalWeekYear"></MonthCalendar>*@
-@*<HorizontalMonthCalendar ResourceData="Resources"></HorizontalMonthCalendar>*@
-<WIGScheduler ResourceData="Resources" EventData="Events" CurrentView="WIGScheduler.View.HorizontalMonth" EventAction="eventclick"></WIGScheduler>
+<WIGScheduler ResourceData="Resources" EventData="Events" CurrentView="WIGScheduler.View.HorizontalMonth" EventAction="eventclick">
 
+</WIGScheduler>
+
+<EventDetail Event="EventDetails" ShowDetails="ShowHideDetails"></EventDetail>
 @code{
+    //Properties
+
     public List<Event> Events { get; set; } = new List<Event>();
     public List<ResourceData> Resources { get; set; } = new List<ResourceData>();
+    public Event EventDetails = new Event();
+    private bool ShowHideDetails = false;
+    //Methods
 
+    //Method for when clicking an event
     private void eventclick(Event eve)
     {
-        Console.WriteLine(eve);
-        //do something
+        EventDetails = eve;
+        ShowHideDetails = true;
+        StateHasChanged();
     }
 
-    private void OnClickHandler(MouseEventArgs e)
-    {
-        Console.WriteLine("Ola");
-        //do something
-    }
 
     protected override void OnInitialized()
     {

@@ -33,12 +33,6 @@ namespace Calendar.Pages
         [Parameter]
         public List<Event> Events { get; set; } = new List<Event>();
 
-        [Parameter]
-        public Option Button { get; set; }
-
-        [Parameter]
-        public Option Button2 { get; set; }
-
         //bool to switch to the next calendar component
         private bool nextView { get; set; } = false;
 
