@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace Calendar.Pages
 {
@@ -177,13 +176,16 @@ namespace Calendar.Pages
                 StateHasChanged();
             }
         }
+        [Parameter]
+        public Action<Event> EventClick { get; set; }
         //method to show the details of the event clicked
         private void EventDetails(Event ev)
         {
-            EventDetail = ev;
-            showPopup = false;
-            showDetails = true;
-            StateHasChanged();
+            //EventDetail = ev;
+            //showPopup = false;
+            //showDetails = true;
+            //StateHasChanged();
+            EventClick.Invoke(ev);
         }
 
         private void CreateView(int ca)

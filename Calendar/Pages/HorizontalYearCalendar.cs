@@ -71,7 +71,7 @@ namespace Calendar.Pages
             .Select(month => new DateTime(2000, month, 1).ToString("MMMM"))
             .ToList();
             _currentMonth = DateTime.Today;
-            InitializeEvents();
+            //InitializeEvents();
             GenerateCalendar();
         }
 
@@ -151,14 +151,16 @@ namespace Calendar.Pages
             showPopup = false;
             StateHasChanged();
         }
-
+        [Parameter]
+        public Action<Event> EventClick { get; set; }
         //method to show the details of the event clicked
         private void EventDetails(Event ev)
         {
-            EventDetail = ev;
-            showPopup = false;
-            showDetails = true;
-            StateHasChanged();
+            //EventDetail = ev;
+            //showPopup = false;
+            //showDetails = true;
+            //StateHasChanged();
+            EventClick.Invoke(ev);
         }
 
         //initializing the events of the calendar

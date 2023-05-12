@@ -142,13 +142,16 @@ namespace Calendar.Pages
         {
             showPopup = false;
         }
+        [Parameter]
+        public Action<Event> EventClick { get; set; }
         //method to show the details of the event clicked
         private void EventDetails(Event ev)
         {
-            EventDetail = ev;
-            showPopup = false;
-            showDetails = true;
-            StateHasChanged();
+            //EventDetail = ev;
+            //showPopup = false;
+            //showDetails = true;
+            //StateHasChanged();
+            EventClick.Invoke(ev);
         }
         //initializing the events of the calendar
         private void InitializeEvents()

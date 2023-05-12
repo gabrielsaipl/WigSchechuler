@@ -5,10 +5,23 @@
 
 @*<MonthCalendar Events="Events" Button="MonthCalendar.Option.HorizontalMonth" Button2="MonthCalendar.Option.HorizontalWeekYear"></MonthCalendar>*@
 @*<HorizontalMonthCalendar ResourceData="Resources"></HorizontalMonthCalendar>*@
-<WIGScheduler ResourceData="Resources" EventData="Events" CurrentView="WIGScheduler.View.Month"></WIGScheduler>
+<WIGScheduler ResourceData="Resources" EventData="Events" CurrentView="WIGScheduler.View.HorizontalMonth" EventAction="eventclick"></WIGScheduler>
+
 @code{
     public List<Event> Events { get; set; } = new List<Event>();
     public List<ResourceData> Resources { get; set; } = new List<ResourceData>();
+
+    private void eventclick(Event eve)
+    {
+        Console.WriteLine(eve);
+        //do something
+    }
+
+    private void OnClickHandler(MouseEventArgs e)
+    {
+        Console.WriteLine("Ola");
+        //do something
+    }
 
     protected override void OnInitialized()
     {

@@ -1,7 +1,7 @@
 ﻿@switch (CurrentView)
 {
     case View.Month:
-        <MonthCalendar Events="EventData" ResourceData="ResourceData">
+        <MonthCalendar Events="EventData" ResourceData="ResourceData" EventClick="eventclick">
             <Buttons>
                 @context. = true;
                 @ScheduleViews
@@ -10,25 +10,25 @@
         break;
 
     case View.HorizontalMonth:
-        <HorizontalMonthCalendar Events="EventData" ResourceData="ResourceData">
+        <HorizontalMonthCalendar Events="EventData" ResourceData="ResourceData" EventClick="eventclick">
 
         </HorizontalMonthCalendar>
 
         break;
     case View.HorizontalYear:
-        <HorizontalYearCalendar Events="EventData" ResourceData="ResourceData"></HorizontalYearCalendar>
+        <HorizontalYearCalendar Events="EventData" ResourceData="ResourceData" EventClick="eventclick"></HorizontalYearCalendar>
 
         break;
     case View.HorizontalFullYear:
-        <HorizontalFullYearCalendar Events="EventData" ResourceData="ResourceData"></HorizontalFullYearCalendar>
+        <HorizontalFullYearCalendar Events="EventData" ResourceData="ResourceData" EventClick="eventclick"></HorizontalFullYearCalendar>
 
         break;
     case View.HorizontalWeekYear:
-        <HorizontalWeekYearCalendar Events="EventData" ResourceData="ResourceData"></HorizontalWeekYearCalendar>
+        <HorizontalWeekYearCalendar Events="EventData" ResourceData="ResourceData" EventClick="eventclick"></HorizontalWeekYearCalendar>
 
         break;
     case null:
-        <MonthCalendar Events="EventData" Resources="ResourceData"></MonthCalendar>
+        <MonthCalendar Events="EventData" ResourceData="ResourceData" EventClick="eventclick"></MonthCalendar>
 
         break;
 }
@@ -51,6 +51,22 @@
     public List<ResourceData> ResourceData { get; set; }
     [Parameter]
     public View? CurrentView { get; set; }
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnEventClick { get; set; }
+    [Parameter]
+    public Action<Event> EventAction { get; set; }
+
+    //Methods
+
+    private void eventclick(Event eve)
+    {
+        EventAction.Invoke(eve);
+    }
+
+    private async void EventClick(MouseEventArgs e)
+    {
+        await OnEventClick.InvokeAsync(e);
+    }
 
 }
 

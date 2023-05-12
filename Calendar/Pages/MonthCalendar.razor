@@ -41,7 +41,7 @@
     showPopup = false;
     showDetails = false;
 
-    <HorizontalMonthCalendar Events="Events" ResourceData="ResourceData"></HorizontalMonthCalendar>
+    <HorizontalMonthCalendar Events="Events" ResourceData="ResourceData" EventClick="EventDetails"></HorizontalMonthCalendar>
 }
 @*can turn this into a component*@
 @if (hide == true)
@@ -50,25 +50,25 @@
     {
         showPopup = false;
         showDetails = false;
-        <HorizontalMonthCalendar Events="Events" ResourceData="ResourceData"></HorizontalMonthCalendar>
+        <HorizontalMonthCalendar Events="Events" ResourceData="ResourceData" EventClick="EventDetails"></HorizontalMonthCalendar>
     }
     else if (calendarSelected == 2)
     {
         showPopup = false;
         showDetails = false;
-        <HorizontalYearCalendar Events="Events" ResourceData="ResourceData"></HorizontalYearCalendar>
+        <HorizontalYearCalendar Events="Events" ResourceData="ResourceData" EventClick="EventDetails"></HorizontalYearCalendar>
     }
     else if (calendarSelected == 3)
     {
         showPopup = false;
         showDetails = false;
-        <HorizontalFullYearCalendar Events="Events" ResourceData="ResourceData"></HorizontalFullYearCalendar>
+        <HorizontalFullYearCalendar Events="Events" ResourceData="ResourceData" EventClick="EventDetails"></HorizontalFullYearCalendar>
     }
     else if (calendarSelected == 5)
     {
         showPopup = false;
         showDetails = false;
-        <HorizontalWeekYearCalendar Events="Events" ResourceData="ResourceData"></HorizontalWeekYearCalendar>
+        <HorizontalWeekYearCalendar Events="Events" ResourceData="ResourceData" EventClick="EventDetails"></HorizontalWeekYearCalendar>
     }
 }
 
