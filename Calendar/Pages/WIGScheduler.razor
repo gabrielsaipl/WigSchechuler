@@ -42,13 +42,11 @@
     [Parameter]
     public RenderFragment ScheduleViews { get; set; }
     [Parameter]
-    public List<Event> EventData { get; set; }
+    public List<Event> EventData { get; set; } = new List<Event>();
     [Parameter]
-    public List<ResourceData> ResourceData { get; set; }
+    public List<ResourceData> ResourceData { get; set; } = new List<ResourceData>();
     [Parameter]
     public View? CurrentView { get; set; }
-    [Parameter]
-    public EventCallback<MouseEventArgs> OnEventClick { get; set; }
     [Parameter]
     public Action<Event> EventAction { get; set; }
 
@@ -57,11 +55,6 @@
     private void eventclick(Event eve)
     {
         EventAction.Invoke(eve);
-    }
-
-    private async void EventClick(MouseEventArgs e)
-    {
-        await OnEventClick.InvokeAsync(e);
     }
 
 }

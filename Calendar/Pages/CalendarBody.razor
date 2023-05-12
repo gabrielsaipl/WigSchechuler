@@ -53,46 +53,49 @@
                                 }
                             }
                         }
-                        @foreach (var ev in EventData)
-                        {
-                            bool exists = false;
-                            if (ev.StartDate.Date.Day == day.Date.Day && ev.StartDate.Date.Month == day.Date.Month)
+                       
+                            @foreach (var ev in EventData)
                             {
-                                //Event with different start and end dates
-                                if (ev.StartDate.Date.Day != ev.EndDate.Date.Day)
+                                bool exists = false;
+                                if (ev.StartDate.Date.Day == day.Date.Day && ev.StartDate.Date.Month == day.Date.Month)
                                 {
-                                    TimeSpan duration = ev.EndDate - ev.StartDate;
-                                    numberOfDays = duration.Days;
-                                    if (numberOfDays > 0 && numberOfDays <= 366)
+                                    //Event with different start and end dates
+                                    if (ev.StartDate.Date.Day != ev.EndDate.Date.Day)
                                     {
-                                        foreach (var e in eventStored)
+                                        TimeSpan duration = ev.EndDate - ev.StartDate;
+                                        numberOfDays = duration.Days;
+                                        if (numberOfDays > 0 && numberOfDays <= 366)
                                         {
-                                            if (e.StartDate == ev.StartDate)
+                                            foreach (var e in eventStored)
                                             {
-                                                exists = true;
+                                                if (e.StartDate == ev.StartDate)
+                                                {
+                                                    exists = true;
+                                                }
                                             }
-                                        }
-                                        if (!exists)
-                                        {
-                                            eventStored.Add(ev);
+                                            if (!exists)
+                                            {
+                                                eventStored.Add(ev);
                                                 eve = ev;
-                                            identifier[increment] = ev.StartDate.Date.Day;
-                                            counter[increment] = numberOfDays;
-                                            EventStartWidth = DayOfWeek;
-                                            EventEndWidth = EventStartWidth;
-                                        }
+                                                identifier[increment] = ev.StartDate.Date.Day;
+                                                counter[increment] = numberOfDays;
+                                                EventStartWidth = DayOfWeek;
+                                                EventEndWidth = EventStartWidth;
+                                            }
 
+                                        }
+                                    }
+                                    //Event With same start and end date
+                                    else
+                                    {
+                                        @* !!!!  TO DO:START, END AND ORDER USING DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
+                                        <div class="appointment" style=" --start: 0; --end: 0; --order: 1; background-color: green;" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick(ev);})>@ev.Title</div>
                                     }
                                 }
-                                //Event With same start and end date
-                                else
-                                {
-                                    @* !!!!  TO DO:START, END AND ORDER USING DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
-                                    <div class="appointment" style=" --start: 0; --end: 0; --order: 1; background-color: green;" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick(ev);})>@ev.Title</div>
-                                }
-                            }
 
-                        }
+                            }
+                        
+
                         numberOfDays = 0;
                         increment++;
                         if (IsFirstDay)
@@ -506,7 +509,7 @@ else if (Type == calendar.HorizontalFullYear)
 
     //the list of events for all the calendars
     [Parameter]
-    public List<Event> EventData { get; set; }
+    public List<Event> EventData { get; set; } = new List<Event>();
 
     //the method that represents clicking on a specific day (Month.Calendar)
     [Parameter]
