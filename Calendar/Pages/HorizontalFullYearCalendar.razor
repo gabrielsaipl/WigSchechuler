@@ -3,7 +3,7 @@
 @if (!nextView)
 {
 
-    <div class="mother-of-all-divs @(hide ? "d-none" : "d-show" )">
+    <div class="calendar @(hide ? "d-none" : "d-show" )">
         <CalendarHeader CSSClass="calendar-header" DateValue="@Year" NextButtonEvent="NextYear" PreviousButtonEvent="PreviousYear">
             <CalendarButtons>
                 <CalendarView Option="CalendarView.View.Month" DisplayName="Mês" Event="CreateView" CSSClass="btn"></CalendarView>

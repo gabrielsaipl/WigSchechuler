@@ -38,8 +38,9 @@
     border: none;
     background-color: #fff;
 }
-.calendar-header{
-    border:none;
+.calendar-header {
+    border: none;
+    flex-wrap: wrap;
 }
 .calendar-header > .btn-group > .btn {
     background-color: #ddd;
@@ -49,8 +50,14 @@
     text-decoration: none;
     display: inline-block;
 }
+.calendar-header > .btn-group > .btn svg {
+    fill: #A4AAB7;
+}
 .calendar-header > .btn-group > .btn.active {
     background-color: var( --brand-primary);
+}
+.calendar-header > .btn-group > .btn.active svg{
+    fill:#fff;
 }
 .calendar-month {
     text-transform: capitalize;
@@ -269,7 +276,6 @@
     background: #F4F4F5;
     padding: 12px 0;
     height: 50px;
-    min-width: 40px;
     line-height: 2px;
     text-align: center;
     font-weight: 500;
@@ -289,13 +295,21 @@
     min-width: 225px;
     box-shadow: 0 0 1px #e2e2e5;
 }
-.calendar-scroll-x > table > thead > tr > th > .day {
-    align-items: center;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    position: relative;
-}
+    .calendar-scroll-x > table > thead > tr > th > .day,
+    .calendar-scroll-x > table > thead > tr > th > .month {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        position: relative;
+    }
+    .calendar-scroll-x > table > thead > tr > th > .month {
+        min-width: 140px;
+    }
+    .calendar-scroll-x > table > thead > tr > th > .day {
+        min-width: 40px;
+    }
+
 .calendar-scroll-x > table > thead > tr > th > .current-day {
     background: var( --brand-primary);
     border-radius: 40px;
