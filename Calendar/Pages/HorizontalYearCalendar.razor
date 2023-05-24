@@ -5,16 +5,16 @@
 
     <div class="calendar @(hide ? "d-none" : "d-show")">
         <CalendarHeader CSSClass="calendar-header" NextButtonEvent="NextYear" PreviousButtonEvent="PreviousYear" DateValue="@Year">
+            <CalendarButtonsLeft>
+                <CalendarView Option="CalendarView.View.MonthLabel" DisplayName="Mês" Event="CreateView" CSSClass="btn"></CalendarView>
+                <CalendarView Option="View.current" DisplayName="Ano" Event="CreateView" CSSClass="active btn"></CalendarView>
+            </CalendarButtonsLeft>
             <CalendarButtons>
-                <CalendarView Option="CalendarView.View.Month" DisplayName="Mês" Event="CreateView" CSSClass="btn"></CalendarView>
+                <CalendarView Option="CalendarView.View.HorizontalFullYear" DisplayName="Dias" Event="CreateView" CSSClass="btn"></CalendarView>
 
-                <CalendarView Option="CalendarView.View.HorizontalMonth" DisplayName="MêsHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+                <CalendarView Option="CalendarView.View.HorizontalWeekYear" DisplayName="Semanas" Event="CreateView" CSSClass="btn"></CalendarView>
 
-                <CalendarView Option="View.current" DisplayName="AnoHoriz" Event="CreateView" CSSClass="active btn"></CalendarView>
-
-                <CalendarView Option="CalendarView.View.HorizontalFullYear" DisplayName="AnoInteiroHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
-
-                <CalendarView Option="CalendarView.View.HorizontalWeekYear" DisplayName="AnoSemanaHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+                <CalendarView Option="View.current" DisplayName="Meses" Event="CreateView" CSSClass="active btn"></CalendarView>
             </CalendarButtons>
         </CalendarHeader>
 

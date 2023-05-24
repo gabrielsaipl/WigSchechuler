@@ -5,16 +5,17 @@
 
     <div class="calendar @(hide ? "d-none" : "d-show" )">
         <CalendarHeader CSSClass="calendar-header" DateValue="@Year" NextButtonEvent="NextYear" PreviousButtonEvent="PreviousYear">
+            <CalendarButtonsLeft>
+                <CalendarView Option="CalendarView.View.MonthLabel" DisplayName="Mês" Event="CreateView" CSSClass="btn"></CalendarView>
+                <CalendarView Option="View.current" DisplayName="Ano" Event="CreateView" CSSClass="active btn"></CalendarView>
+            </CalendarButtonsLeft>
             <CalendarButtons>
-                <CalendarView Option="CalendarView.View.Month" DisplayName="Mês" Event="CreateView" CSSClass="btn"></CalendarView>
 
-                <CalendarView Option="CalendarView.View.HorizontalMonth" DisplayName="MêsHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+                <CalendarView Option="CalendarView.View.current" DisplayName="Dias" Event="CreateView" CSSClass="active btn"></CalendarView>
 
-                <CalendarView Option="View.HorizontalYear" DisplayName="AnoHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+                <CalendarView Option="CalendarView.View.HorizontalWeekYear" DisplayName="Semanas" Event="CreateView" CSSClass="btn"></CalendarView>
 
-                <CalendarView Option="CalendarView.View.current" DisplayName="AnoInteiroHoriz" Event="CreateView" CSSClass="active btn"></CalendarView>
-
-                <CalendarView Option="CalendarView.View.HorizontalWeekYear" DisplayName="AnoSemanaHoriz" Event="CreateView" CSSClass="btn"></CalendarView>
+                <CalendarView Option="View.HorizontalYear" DisplayName="Meses" Event="CreateView" CSSClass="btn"></CalendarView>
             </CalendarButtons>
         </CalendarHeader>
         <CalendarBody Type="CalendarBody.calendar.HorizontalFullYear" MonthsList="@monthsOfYear" MonthData="Months" YearString="@Year" DayData="Days" ResourceData="ResourceData" CurrentMonthValue="@_currentMonth" EventData="Events" HorizontalFullYearDayClickMethod="DayClicked" EventClickMethod="EventDetails">
