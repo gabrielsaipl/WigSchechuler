@@ -327,21 +327,19 @@ else if (Type == calendar.HorizontalYear)
                                     @resource.Text @resource.Id
                                 </th>
 
-                                @for (int i = 1; i <= ResourceData.Count; i++)
-                                {
 
                                     @for (int j = 1; j <= MonthsList.Count; j++)
                                     {
-                                        int month, resourse;
+                                        int month, Resourse;
                                         month = j;
-                                        resourse = i;
+                                        Resourse = resource.Id;
                                         var date = new DateTime(CurrentMonthValue.Year, month, CurrentMonthValue.Day);
 
                                         <td>
-                                            <div class="resource-day" id="@resourse @month" @onclick=@(() => { Op = 3; monthvalue = month; resourcevalue = resourse; dayclick(); })>
+                                            <div class="resource-day" id="@Resourse @month" @onclick=@(() => { Op = 3; monthvalue = month; resourcevalue = Resourse; dayclick(); })>
                                                 @foreach (var ev in EventData)
                                                 {
-                                                    if (ev.EventResource == resourse)
+                                                    if (ev.EventResource == Resourse)
                                                     {
                                                         if (ev.StartDate.Month == date.Month && ev.StartDate.Year == date.Year)
                                                         {
@@ -354,7 +352,7 @@ else if (Type == calendar.HorizontalYear)
 
                                     }
 
-                                }
+                                
                             </tr>
                         }
                     }
