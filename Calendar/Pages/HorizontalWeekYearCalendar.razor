@@ -61,7 +61,7 @@
                     @Resources
                     @if (Resources == null)
                         {
-
+                        var currentmonth = 1;
                         @foreach (var resource in ResourceData)
                             {
                             <tr>
@@ -69,37 +69,22 @@
                                     @resource.Text @resource.Id
                                 </th>
 
-
-                              
-                            </tr>
-                            }
-                        }
-                    </tbody>
-            </table>
-        </div>
-    </div>
-
- 
-
-         
-                        <div style="width:1451px" class="calendar-grid">
-                            @for (int i = 1; i <= ResourceData.Count; i++)
-                            {
-                                List<Event> eventStored = new List<Event>();
-                                var currentmonth = 1;
+                                @{List<Event> eventStored = new List<Event>();
+                                }
                                 <div class="grid-line">
                                     @foreach (var month in Month)
                                     {
 
                                         <div class="weeks">
+                                            
                                             @foreach (var week in month.WeeksList)
                                             {
-                                                int resourse, e1 = 0, e2 = 0, e3 = 0, e4 = 0, e5 = 0;
-                                                resourse = i;
-                                           
+                                                int Resourse, e1 = 0, e2 = 0, e3 = 0, e4 = 0, e5 = 0;
+                                                Resourse = resource.Id;
+                                                <div class="grid-column2" id="@Resourse" @onclick="() => DayClicked(Resourse, currentmonth, week.WeekNumber)">
                                                     @foreach (var ev in Events)
                                                     {
-                                                        if (ev.EventResource == resourse)
+                                                        if (ev.EventResource == Resourse)
                                                         {
                                                             if (week.WeekNumber == 1 && ev.StartDate.Month == currentmonth && (ev.StartDate.Day >= 1 && ev.StartDate.Day < 7))
                                                             {
@@ -153,14 +138,27 @@
                                                             }
                                                         }
                                                     }
-                              
+                                                </div>
                                             }
                                             @{currentmonth++;}
+                                        
                                         </div>
                                     }
                                 </div>
+                              
+                            </tr>
                             }
-                        </div>
+                        }
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+ 
+
+         
+                        
+                        
         </div>
         @if (hide == true)
         {
