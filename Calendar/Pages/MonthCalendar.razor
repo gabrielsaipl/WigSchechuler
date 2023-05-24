@@ -6,15 +6,15 @@
     <div class="calendar @(hide ? "d-none" : "d-show")">
         <CalendarHeader DateValue="@MonthYear" NextButtonEvent="NextMonth" PreviousButtonEvent="PreviousMonth">
             <CalendarButtonsLeft>
+                <CalendarView Option="CalendarView.View.current" DisplayName="Mês" Event="CreateView" CSSClass="active btn"></CalendarView>
+                <CalendarView Option="View.HorizontalWeekYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
+            </CalendarButtonsLeft>
+            <CalendarButtons>
                 @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
                 <CalendarView DisplayName="Calendario Icon" CSSClass="active btn"></CalendarView>
                 <CalendarView Option="View.HorizontalMonth" DisplayName="Colab Icon" Event="CreateView" CSSClass="btn"></CalendarView>
-            </CalendarButtonsLeft>
-            <CalendarButtons>
-                <CalendarView Option="CalendarView.View.current" DisplayName="Mês" Event="CreateView" CSSClass="active btn"></CalendarView>
-
-                <CalendarView Option="View.HorizontalWeekYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
             </CalendarButtons>
+
         </CalendarHeader>
         <div class="calendar-week-day">
             <div class="calendar-week-day-child">Domingo</div>

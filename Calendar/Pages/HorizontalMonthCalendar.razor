@@ -7,17 +7,13 @@
         <CalendarHeader CSSClass="calendar-header" DateValue="@MonthYear" PreviousButtonEvent="PreviousMonth" NextButtonEvent="NextMonth">
             <CalendarButtonsLeft>
                 @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
-                <CalendarView Option="View.Month" DisplayName="Calendario Icon" CSSClass="btn" Event="CreateView"></CalendarView>
-                <CalendarView Option="View.HorizontalMonth" DisplayName="Colab Icon" CSSClass="active btn"></CalendarView>
+                <CalendarView Option="View.current" DisplayName="Mês" Event="CreateView" CSSClass="active btn"></CalendarView>
+                <CalendarView Option="View.HorizontalWeekYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
             </CalendarButtonsLeft>
             <CalendarButtons>
                 @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
-
-
-                <CalendarView Option="View.current" DisplayName="Mês" Event="CreateView" CSSClass="active btn"></CalendarView>
-
-
-                <CalendarView Option="View.HorizontalWeekYear" DisplayName="Ano" Event="CreateView" CSSClass="btn"></CalendarView>
+                <CalendarView Option="View.Month" DisplayName="Calendario Icon" CSSClass="btn" Event="CreateView"></CalendarView>
+                <CalendarView Option="View.HorizontalMonth" DisplayName="Colab Icon" CSSClass="active btn"></CalendarView>
             </CalendarButtons>
         </CalendarHeader>
         <CalendarBody Type="CalendarBody.calendar.HorizontalMonth" ResourceData="ResourceData" CurrentMonthValue="_currentMonth" DayData="Days" EventData="Events" HorizontalMonthDayClickMethod="DayClicked" EventClickMethod="EventDetails">
