@@ -456,11 +456,38 @@ else if (Type == calendar.HorizontalFullYear)
             <table class="w-100">
                 <thead>
                     <tr>
+                        @{int monthCount = 1; string colspanValue = "0";}
                         <th style="min-width: 225px;"></th>
                         @foreach (var month in MonthsList)
                         {
                             @* TO DO: COLSPAN DYNAMIC  - NUMBER OF DAYS FOR EACH MONTH *@
-                            <th colspan="30"><div class="month">@month</div></th>
+                            switch (monthCount)
+                            {
+                                case 1:
+                                case 3:
+                                case 5:
+                                case 7:
+                                case 8:
+                                case 10:
+                                case 12:
+                                    colspanValue = "31";
+                                    break;
+                                case 4:
+                                case 6:
+                                case 9:
+                                case 11:
+                                    colspanValue = "30";
+                                    break;
+                                case 2:
+                                if (DateTime.IsLeapYear(int.Parse(YearString)))
+                                    {
+                                        colspanValue = "29";
+                                    }
+                                    else { colspanValue = "28"; }
+                                    break;
+                            }
+                            <th colspan="@colspanValue"><div class="month">@month</div></th>
+                            monthCount++;
                         }
                     </tr>
                     <tr>
