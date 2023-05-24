@@ -460,7 +460,6 @@ else if (Type == calendar.HorizontalFullYear)
                         <th style="min-width: 225px;"></th>
                         @foreach (var month in MonthsList)
                         {
-                            @* TO DO: COLSPAN DYNAMIC  - NUMBER OF DAYS FOR EACH MONTH *@
                             switch (monthCount)
                             {
                                 case 1:
@@ -535,81 +534,78 @@ else if (Type == calendar.HorizontalFullYear)
                                     @resource.Text @resource.Id
                                 </th>
 
-                                @for (int i = 1; i <= ResourceData.Count; i++)
+                                
+                                    @{var currentmonth = 1;}
+
+                                    @foreach (var month in MonthData)
                                 {
-                                    var currentmonth = 1;
-                    
-                                        @foreach (var month in MonthData)
-                                        {
-                                            int numberOfDays = 0, increment = 0;
-                                            int[] counter = new int[250];
-                                            int[] identifier = new int[250];
-                                            List<Event> eventStored = new List<Event>();
-                                            for (int k = 1; k <= month.Day.Count; k++)
-                                            {
-                                                int day, resourse, gridMonth;
-                                                day = k;
-                                                resourse = i;
-                                                gridMonth = currentmonth;
-                                                var date = new DateTime(CurrentMonthValue.Year, currentmonth, day);
+                                    int numberOfDays = 0, increment = 0;
+                                    int[] counter = new int[250];
+                                    int[] identifier = new int[250];
+                                    List<Event> eventStored = new List<Event>();
+                                    for (int k = 1; k <= month.Day.Count; k++)
+                                    {
+                                        int day, resourse, gridMonth;
+                                        day = k;
+                                        resourse = resource.Id;
+                                        gridMonth = currentmonth;
+                                        var date = new DateTime(CurrentMonthValue.Year, currentmonth, day);
 
+                                        <td>
+                                            <div class="resource-day" id="@resourse @day @gridMonth" @onclick=@(()=>{Op = 4;dayvalue = day; resourcevalue = resourse; gridmonthValue = gridMonth; dayclick();})>
 
-
-                                                <td>
-                                                    <div class="resource-day" id="@resourse @day @gridMonth" @onclick=@(()=>{Op = 4;dayvalue = day; resourcevalue = resourse; gridmonthValue = gridMonth; dayclick();})>
-
-                                                        @foreach (var e in eventStored)
+                                                @foreach (var e in eventStored)
+                                                {
+                                                    for (int j = 0; j < 250; j++)
+                                                    {
+                                                        if (identifier[j] == e.StartDate.Date.Day && counter[j] > 0 && e.StartDate.Date.Day != k && e.EventResource == resource.Id)
                                                         {
-                                                            for (int j = 0; j < 250; j++)
-                                                            {
-                                                                if (identifier[j] == e.StartDate.Date.Day && counter[j] > 0 && e.StartDate.Date.Day != k && e.EventResource == i)
-                                                                {
-                                                                    <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = e; eventclick(e);})>@e.Title</div>
-                                                                    counter[j] = counter[j] - 1;
-                                                                }
-                                                            }
+                                                            <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = e; eventclick(e);})>@e.Title</div>
+                                                            counter[j] = counter[j] - 1;
                                                         }
-                                                        @foreach (var ev in EventData)
+                                                    }
+                                                }
+                                                @foreach (var ev in EventData)
+                                                {
+                                                    bool exists = false;
+                                                    if (ev.StartDate.Date.Day == k && ev.StartDate.Date.Month == currentmonth && ev.EventResource == resource.Id)
+                                                    {
+                                                        if (ev.StartDate.Date.Day != ev.EndDate.Date.Day)
                                                         {
-                                                            bool exists = false;
-                                                            if (ev.StartDate.Date.Day == k && ev.StartDate.Date.Month == currentmonth && ev.EventResource == i)
+                                                            TimeSpan duration = ev.EndDate - ev.StartDate;
+                                                            numberOfDays = duration.Days;
+                                                            if (numberOfDays > 0 && numberOfDays <= 366)
                                                             {
-                                                                if (ev.StartDate.Date.Day != ev.EndDate.Date.Day)
+                                                                foreach (var e in eventStored)
                                                                 {
-                                                                    TimeSpan duration = ev.EndDate - ev.StartDate;
-                                                                    numberOfDays = duration.Days;
-                                                                    if (numberOfDays > 0 && numberOfDays <= 366)
+                                                                    if (e.StartDate == ev.StartDate)
                                                                     {
-                                                                        foreach (var e in eventStored)
-                                                                        {
-                                                                            if (e.StartDate == ev.StartDate)
-                                                                            {
-                                                                                exists = true;
-                                                                            }
-                                                                        }
-                                                                        if (!exists)
-                                                                        {
-                                                                            eventStored.Add(ev);
-                                                                            identifier[increment] = ev.StartDate.Date.Day;
-                                                                            counter[increment] = numberOfDays;
-                                                                            <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick(ev);})>@ev.Title</div>
-                                                                        }
-
+                                                                        exists = true;
                                                                     }
                                                                 }
-                                                                else
+                                                                if (!exists)
                                                                 {
+                                                                    eventStored.Add(ev);
+                                                                    identifier[increment] = ev.StartDate.Date.Day;
+                                                                    counter[increment] = numberOfDays;
                                                                     <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick(ev);})>@ev.Title</div>
                                                                 }
+
                                                             }
                                                         }
-                                                    </div>
-                                                </td>
+                                                        else
+                                                        {
+                                                            <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick(ev);})>@ev.Title</div>
+                                                        }
+                                                    }
+                                                }
+                                            </div>
+                                        </td>
 
-                                            }
-
-                                            }
+                                    }
+                                        currentmonth++;
                                 }
+
                             </tr>
                         }
                     }
