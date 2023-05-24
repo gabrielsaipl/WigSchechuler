@@ -37,16 +37,23 @@
                     </tr>
                     <tr>
                         <th style="min-width: 225px;"></th>
+                        @{int monthValue = 1; string colspanValue = "";}
                         @foreach (var week in Month)
                         {
-                         <th colspan="4">
-                             @foreach (var weekitem in week.WeeksList)
-                             {
+                            if (monthValue == 2)
+                            {
+                                colspanValue = "4";
+                            }
+                            else{ colspanValue = "5"; }
+                            <th colspan="@colspanValue">
+                                 @foreach (var weekitem in week.WeeksList)
+                                 {
 
-                                 <div class="day">@("s" + weekitem.WeekNumber)</div>
+                                     <div class="day">@("s" + weekitem.WeekNumber)</div>
 
-                             }
-                         </th>
+                                 }
+                            </th>
+                            monthValue++;
                         }
                     </tr>
                 </thead>
@@ -123,6 +130,7 @@
                                                                 }
 
                                                             }
+                                                            //TODO check if year is leap year for week 4 to have 29 days
                                                             else if (week.WeekNumber == 4 && ev.StartDate.Month == currentmonth && ((ev.StartDate.Day >= 21 && ev.StartDate.Day < 28) || ev.EndDate.Day >= 21))
                                                             {
 
