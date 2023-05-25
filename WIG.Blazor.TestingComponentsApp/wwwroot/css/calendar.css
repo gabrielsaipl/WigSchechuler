@@ -300,7 +300,7 @@
     min-width: 225px;
 }
 
-.resource-day {
+.calendar-horizontal-month .resource-day {
     background: white;
     padding: 12px 0;
     height: 50px;
@@ -321,19 +321,27 @@
 
 .calendar-horizontal-month .calendar-scroll-x > table > thead > tr > th > .month {
     min-width: 140px;
+    font-weight: var(--weight-bold);
+    color: #535353;
+    text-transform: capitalize;
 }
 
-.calendar-scroll-x > table > thead > tr > th > .day {
+.calendar-horizontal-month .calendar-scroll-x > table > thead > tr > th > .day {
     min-width: 40px;
 }
 
-.calendar-scroll-x > table > thead > tr > th > .current-day {
+.calendar-horizontal-month .calendar-scroll-x > table > thead > tr > th > .current-day {
     background: var( --brand-primary);
     border-radius: 40px;
     color: #fff;
     font-weight: 600;
     margin: 0 7px;
 }
+.calendar-horizontal-month .calendar-scroll-x > table > thead > tr > th > .month.current {
+    color: var(--brand-primary);
+    font-weight: var(--weight-bold);
+}
+
 
 
 
@@ -350,23 +358,27 @@
     align-items: end;
     line-height: 18px;
 }
-.calendar-horizontal-year .calendar-scroll-x > table > thead > tr > th > .month.current {
+.calendar-horizontal-year .calendar-scroll-x > table > thead > tr > th > .month.current,
+.calendar-horizontal-year .calendar-scroll-x > table > thead > tr > th > .day.current {
     color: var( --brand-primary);
     font-weight: var(--weight-bold);
 }
+
 .calendar-horizontal-year .calendar-scroll-x > table > thead > tr:nth-child(2) > th {
     min-width: 25px;
-    max-width: 25px;
-    
+    max-width: 25px; 
 }
 .calendar-horizontal-year .calendar-scroll-x > table > thead > tr > th .week {
     font-weight: var(--weight-regular);
     color: #A3A6B4;
     text-transform: capitalize;
 }
+.calendar-horizontal-year .calendar-scroll-x > table > thead > tr > th .day {
+    color: #A3A6B4;
+}
 
 /* Year Table Body Weeks */
- .calendar-horizontal-year .resource-week {
+.calendar-horizontal-year .resource {
     background: #fff;
     height: 50px;
     line-height: 2px;

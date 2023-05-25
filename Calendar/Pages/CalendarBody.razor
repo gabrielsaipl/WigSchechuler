@@ -121,6 +121,7 @@
         }
     </div>
 }
+
 else if (Type == calendar.HorizontalMonth)
 {
 
@@ -304,7 +305,7 @@ else if (Type == calendar.HorizontalYear)
                         {
                             @if (month.Contains(CurrentMonthString) && Int32.Parse(YearString) == DateTime.Today.Year)
                             {
-                                <th><div class="month current-day">@month</div></th>
+                                <th><div class="month current">@month</div></th>
                             }
                             else
                             {
@@ -445,10 +446,7 @@ else if (Type == calendar.HorizontalYear)
 
 else if (Type == calendar.HorizontalFullYear)
 {
-
-
-
-    <div class="calendar-horizontal-month" style="display:flex">
+    <div class="calendar-horizontal-year" style="display:flex">
 
         <div class="calendar-scroll-x">
             <table class="w-100">
@@ -498,7 +496,7 @@ else if (Type == calendar.HorizontalFullYear)
                             {
                                 if (k == DateTime.Today.Day && monthcount == DateTime.Today.Month && Int32.Parse(YearString) == DateTime.Today.Year)
                                 {
-                                    <th><div class="day current-day">@k</div></th>
+                                    <th><div class="day current">@k</div></th>
                                 }
                                 else
                                 {
@@ -550,7 +548,7 @@ else if (Type == calendar.HorizontalFullYear)
                                         var date = new DateTime(CurrentMonthValue.Year, currentmonth, day);
 
                                         <td>
-                                            <div class="resource-day" id="@resourse @day @gridMonth" @onclick=@(()=>{Op = 4;dayvalue = day; resourcevalue = resourse; gridmonthValue = gridMonth; dayclick();})>
+                                            <div class="resource day" id="@resourse @day @gridMonth" @onclick=@(()=>{Op = 4;dayvalue = day; resourcevalue = resourse; gridmonthValue = gridMonth; dayclick();})>
 
                                                 @foreach (var e in eventStored)
                                                 {
