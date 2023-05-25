@@ -15,44 +15,56 @@
     </CalendarHeader>
 
 
-    <div class="calendar-horizontal-month" style="display:flex">
+    <div class="calendar-horizontal-year" style="display:flex">
 
         <div class="calendar-scroll-x">
             <table class="w-100">
                 <thead>
                     <tr>
                         <th style="min-width: 225px;"></th>
+                        @{int monthValue = 1; string colspanValue = "";}
                         @foreach (var month in monthsOfYear)
 
                         {
                             @if (month.Contains(thisMonth) && Int32.Parse(Year) == DateTime.Today.Year)
                             {
-                                <th><div class="month current-day">@month</div></th>
+                                if (monthValue == 2)
+                                {
+                                    colspanValue = "4";
+                                }
+                                else { colspanValue = "5"; }
+                                <th colspan="@colspanValue"><div class="month current">@month</div></th>
+                                monthValue++; 
                             }
                             else
                             {
-                                <th><div class="month">@month</div></th>
+                                if (monthValue == 2)
+                                {
+                                    colspanValue = "4";
+                                }
+                                else { colspanValue = "5"; }
+                                <th colspan="@colspanValue"><div class="month">@month</div></th>
+                                monthValue++; 
                             }
                         }
+
                     </tr>
                     <tr>
                         <th style="min-width: 225px;"></th>
-                        @{int monthValue = 1; string colspanValue = "";}
+                        
                         @foreach (var week in Month)
                         {
-                            if (monthValue == 2)
+          
+                            
+                            @foreach (var weekitem in week.WeeksList)
                             {
-                                colspanValue = "4";
+
+                                <th>
+                                    <div class="week">@("s" + weekitem.WeekNumber)</div>
+                                </th>
+
                             }
-                            else{ colspanValue = "5"; }
-                            <th colspan="@colspanValue">
-                                 @foreach (var weekitem in week.WeeksList)
-                                 {
-
-                                     <div class="day">@("s" + weekitem.WeekNumber)</div>
-
-                                 }
-                            </th>
+                                    
                             monthValue++;
                         }
                     </tr>
@@ -64,87 +76,90 @@
                         var currentmonth = 1;
                         @foreach (var resource in ResourceData)
                             {
-                            <tr>
+                            <tr class="weeks">
                                 <th>
                                     @resource.Text @resource.Id
                                 </th>
 
-                                @{List<Event> eventStored = new List<Event>();
-                                }
-                                <div class="grid-line">
+                                @{List<Event> eventStored = new List<Event>();}
+  
                                     @foreach (var month in Month)
                                     {
 
-                                        <div class="weeks">
+                  
                                             
                                             @foreach (var week in month.WeeksList)
                                             {
                                                 int Resourse, e1 = 0, e2 = 0, e3 = 0, e4 = 0, e5 = 0;
                                                 Resourse = resource.Id;
-                                                <div class="grid-column2" id="@Resourse" @onclick="() => DayClicked(Resourse, currentmonth, week.WeekNumber)">
-                                                    @foreach (var ev in Events)
-                                                    {
-                                                        if (ev.EventResource == Resourse)
+
+
+                                                <td>
+                                                    <div class="resource-week" id="@Resourse" @onclick="() => DayClicked(Resourse, currentmonth, week.WeekNumber)">
+                                                        @foreach (var ev in Events)
                                                         {
-                                                            if (week.WeekNumber == 1 && ev.StartDate.Month == currentmonth && (ev.StartDate.Day >= 1 && ev.StartDate.Day < 7))
+                                                            if (ev.EventResource == Resourse)
                                                             {
-
-                                                                if (e1 == 0)
+                                                                if (week.WeekNumber == 1 && ev.StartDate.Month == currentmonth && (ev.StartDate.Day >= 1 && ev.StartDate.Day < 7))
                                                                 {
-                                                                    e1++;
-                                                                    <div class="event-count3" @onclick:stopPropagation="true" @onclick=@(()=>{EventDetails(ev);})></div>
+
+                                                                    if (e1 == 0)
+                                                                    {
+                                                                        e1++;
+                                                                        <div class="event-count3" @onclick:stopPropagation="true" @onclick=@(()=>{EventDetails(ev);})></div>
+                                                                    }
+
                                                                 }
-
-                                                            }
-                                                            else if (week.WeekNumber == 2 && ev.StartDate.Month == currentmonth && ((ev.StartDate.Day >= 7 && ev.StartDate.Day < 14) || ev.EndDate.Day >= 7))
-                                                            {
-
-                                                                if (e2 == 0)
+                                                                else if (week.WeekNumber == 2 && ev.StartDate.Month == currentmonth && ((ev.StartDate.Day >= 7 && ev.StartDate.Day < 14) || ev.EndDate.Day >= 7))
                                                                 {
-                                                                    e2++;
-                                                                    <div class="event-count3" @onclick:stopPropagation="true" @onclick=@(()=>{EventDetails(ev);})></div>
-                                                                }
-                                                            }
-                                                            else if (week.WeekNumber == 3 && ev.StartDate.Month == currentmonth && ((ev.StartDate.Day >= 14 && ev.StartDate.Day < 21) || ev.EndDate.Day >= 14))
-                                                            {
 
-                                                                if (e3 == 0)
+                                                                    if (e2 == 0)
+                                                                    {
+                                                                        e2++;
+                                                                        <div class="event-count3" @onclick:stopPropagation="true" @onclick=@(()=>{EventDetails(ev);})></div>
+                                                                    }
+                                                                }
+                                                                else if (week.WeekNumber == 3 && ev.StartDate.Month == currentmonth && ((ev.StartDate.Day >= 14 && ev.StartDate.Day < 21) || ev.EndDate.Day >= 14))
                                                                 {
-                                                                    e3++;
-                                                                    <div class="event-count3" @onclick:stopPropagation="true" @onclick=@(()=>{EventDetails(ev);})></div>
+
+                                                                    if (e3 == 0)
+                                                                    {
+                                                                        e3++;
+                                                                        <div class="event-count3" @onclick:stopPropagation="true" @onclick=@(()=>{EventDetails(ev);})></div>
+                                                                    }
+
                                                                 }
-
-                                                            }
-                                                            //TODO check if year is leap year for week 4 to have 29 days
-                                                            else if (week.WeekNumber == 4 && ev.StartDate.Month == currentmonth && ((ev.StartDate.Day >= 21 && ev.StartDate.Day < 28) || ev.EndDate.Day >= 21))
-                                                            {
-
-                                                                if (e4 == 0)
+                                                                //TODO check if year is leap year for week 4 to have 29 days
+                                                                else if (week.WeekNumber == 4 && ev.StartDate.Month == currentmonth && ((ev.StartDate.Day >= 21 && ev.StartDate.Day < 28) || ev.EndDate.Day >= 21))
                                                                 {
-                                                                    e4++;
-                                                                    <div class="event-count3" @onclick:stopPropagation="true" @onclick=@(()=>{EventDetails(ev);})></div>
+
+                                                                    if (e4 == 0)
+                                                                    {
+                                                                        e4++;
+                                                                        <div class="event-count3" @onclick:stopPropagation="true" @onclick=@(()=>{EventDetails(ev);})></div>
+                                                                    }
+
                                                                 }
-
-                                                            }
-                                                            else if (week.WeekNumber == 5 && ev.StartDate.Month == currentmonth && ((ev.StartDate.Day >= 28 && ev.StartDate.Day < 31) || ev.EndDate.Day >= 28))
-                                                            {
-
-                                                                if (e5 == 0)
+                                                                else if (week.WeekNumber == 5 && ev.StartDate.Month == currentmonth && ((ev.StartDate.Day >= 28 && ev.StartDate.Day < 31) || ev.EndDate.Day >= 28))
                                                                 {
-                                                                    e5++;
-                                                                    <div class="event-count3" @onclick:stopPropagation="true" @onclick=@(()=>{EventDetails(ev);})></div>
-                                                                }
 
+                                                                    if (e5 == 0)
+                                                                    {
+                                                                        e5++;
+                                                                        <div class="event-count3" @onclick:stopPropagation="true" @onclick=@(()=>{EventDetails(ev);})></div>
+                                                                    }
+
+                                                                }
                                                             }
                                                         }
-                                                    }
-                                                </div>
+                                                    </div>
+                                                </td>
                                             }
-                                            @{currentmonth++;}
+                                            currentmonth++;
                                         
-                                        </div>
+                                  
                                     }
-                                </div>
+                        
                               
                             </tr>
                             }

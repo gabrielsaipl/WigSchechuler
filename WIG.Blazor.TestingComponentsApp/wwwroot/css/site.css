@@ -369,14 +369,9 @@ div.weeks-header div {
         background-color: #eeeeee;
     }
 
-.weeks {
-    display: inline-block;
-    padding: 0px 3px 0px 0px;
-}
 
 .event-count3 {
-    width: 23.3px;
-    height: 79.1px;
+    height: 100%;
     background: lightgreen;
     align-self: center;
     border-top: 0.1px solid;
