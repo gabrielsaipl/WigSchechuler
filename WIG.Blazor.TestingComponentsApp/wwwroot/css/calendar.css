@@ -218,6 +218,10 @@
     color: #ababab;
 }
 
+.calendar > .appointment {
+    line-height: 24px;
+}
+
 .calendar > .calendar-body > .week > .appointments > .appointment {
     position: absolute;
     left: calc(var(--start) / 7 * 100%);
@@ -286,7 +290,6 @@
     background: #F4F4F5;
     padding: 12px 0;
     height: 50px;
-    line-height: 2px;
     text-align: center;
     font-weight: 500;
     color: #515164;
@@ -305,7 +308,6 @@
     padding: 12px 0;
     height: 50px;
     min-width: 40px;
-    line-height: 2px;
     text-align: center;
     border: 1px solid #EAF0F4;
     margin: 0;
@@ -381,7 +383,6 @@
 .calendar-horizontal-year .resource {
     background: #fff;
     height: 50px;
-    line-height: 2px;
     text-align: center;
     border: 1px solid #EAF0F4;
     margin: 0;

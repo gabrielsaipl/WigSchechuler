@@ -3,6 +3,8 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color:#f7f7f7;
+    font-size:1em;
+    line-height:1.375em;
 }
 
 h1:focus {
