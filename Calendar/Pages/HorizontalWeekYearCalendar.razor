@@ -86,13 +86,27 @@
                                     @foreach (var month in Month)
                                     {
 
-                  
-                                            
-                                            @foreach (var week in month.WeeksList)
-                                            {
-                                                int Resourse, e1 = 0, e2 = 0, e3 = 0, e4 = 0, e5 = 0;
-                                                Resourse = resource.Id;
 
+                                    int weekCount = 1;
+                                    @foreach (var week in month.WeeksList)
+                                    {
+                                        int Resourse, e1 = 0, e2 = 0, e3 = 0, e4 = 0, e5 = 0;
+                                        Resourse = resource.Id;
+                                            if (currentmonth == 2)
+                                            {
+                                                    
+                                                if (weekCount == 4)
+                                                {
+                                                    //DO SOMETHING
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (weekCount == 5)
+                                                {
+                                                    //DO SOMETHING
+                                                }
+                                            }
 
                                                 <td>
                                                     <div class="resource week" id="@Resourse" @onclick="() => DayClicked(Resourse, currentmonth, week.WeekNumber)">
@@ -154,7 +168,9 @@
                                                         }
                                                     </div>
                                                 </td>
-                                            }
+
+                                    weekCount++;
+                                    }
                                             currentmonth++;
                                         
                                   
