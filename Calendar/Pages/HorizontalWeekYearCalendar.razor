@@ -85,7 +85,10 @@
   
                                     @foreach (var month in Month)
                                     {
-
+                                    if (currentmonth == 13)
+                                    {
+                                        currentmonth = 1;
+                                    }
 
                                     int weekCount = 1;
                                     @foreach (var week in month.WeeksList)
