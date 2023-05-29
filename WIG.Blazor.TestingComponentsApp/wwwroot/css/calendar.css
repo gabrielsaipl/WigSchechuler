@@ -387,6 +387,9 @@
     border: 1px solid #EAF0F4;
     margin: 0;
 }
+.calendar-horizontal-year .calendar-scroll-x > table > tbody > tr > td.last-week {
+    border-right: 1px solid #BABABA;
+}
 
 
 
