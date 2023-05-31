@@ -334,7 +334,7 @@ else if (Type == calendar.HorizontalYear)
                                         int month, Resourse;
                                         month = j;
                                         Resourse = resource.Id;
-                                        var date = new DateTime(CurrentMonthValue.Year, month, CurrentMonthValue.Day);
+                                        var date = new DateTime(CurrentMonthValue.Year, month, 1);
 
                                         <td>
                                             <div class="resource-day" id="@Resourse @month" @onclick=@(() => { Op = 3; monthvalue = month; resourcevalue = Resourse; dayclick(); })>

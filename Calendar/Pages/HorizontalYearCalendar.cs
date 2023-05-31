@@ -130,7 +130,7 @@ namespace Calendar.Pages
         {
             SelectedResource = resourse;
 
-            var ClickedDay = new DateTime(_currentMonth.Year, monthNumber, _currentMonth.Day);
+            var ClickedDay = new DateTime(_currentMonth.Year, monthNumber, 1);
 
             foreach (var day in Days)
             {
