@@ -425,6 +425,12 @@ a:hover {
     text-transform: capitalize;
 }
 
+/* Full Year Calendar border */
+
+.calendar-horizontal-year .calendar-scroll-x > table > tbody > tr > td.last-day {
+    border-right: 1px solid #BABABA;
+}
+
 
 
 

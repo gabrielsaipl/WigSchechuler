@@ -564,8 +564,14 @@ else if (Type == calendar.HorizontalFullYear)
                                         resourse = resource.Id;
                                         gridMonth = currentmonth;
                                         var date = new DateTime(CurrentMonthValue.Year, currentmonth, day);
-
-                                        <td>
+                                        int daysInMonth = DateTime.DaysInMonth(Int32.Parse(YearString), currentmonth);
+                                        bool isLastDay = false;
+                                        string cssClass = "";
+                                        if (isLastDay = day == daysInMonth)
+                                        {
+                                            cssClass = "last-day";
+                                        }
+                                            <td class="@cssClass">
                                             <div class="resource-day" id="@resourse @day @gridMonth" @onclick=@(()=>{Op = 4;dayvalue = day; resourcevalue = resourse; gridmonthValue = gridMonth; dayclick();})>
 
                                                 @foreach (var e in eventStored)
