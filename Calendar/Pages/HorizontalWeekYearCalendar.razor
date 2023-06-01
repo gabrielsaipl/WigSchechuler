@@ -78,7 +78,13 @@
                             var monthCount = 0;
                             <tr class="weeks">
                                 <th>
-                                    @resource.Text @resource.Id
+                                    <a href="#" class="resource">
+                                        <img src="https://bc3-production-assets-cdn.basecamp-static.com/5210725/people/BAhpBAkkNQI=--b1af44bd5b68f77ba22f8889ed577e6429496da9/avatar?v=1" alt="user"/>
+                                        <div class="resource-info">
+                                            <p class="resource-name">@resource.Text @resource.Id</p>
+                                            <p class="resource-department">função</p>
+                                        </div>
+                                    </a>
                                 </th>
 
                                 @{List<Event> eventStored = new List<Event>();}
@@ -112,7 +118,7 @@
 
                                                 <td class="@cssClass">
                                                 @{int selectedMonth = monthCount + 1;}
-                                            <div class="resource week" id="@Resourse" @onclick="() => DayClicked(Resourse, selectedMonth, week.WeekNumber)">
+                                            <div class="resource-week" id="@Resourse" @onclick="() => DayClicked(Resourse, selectedMonth, week.WeekNumber)">
                                                         @foreach (var ev in Events)
                                                         {
                                                             if (ev.EventResource == Resourse)

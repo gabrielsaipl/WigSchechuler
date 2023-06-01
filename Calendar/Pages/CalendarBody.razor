@@ -149,7 +149,13 @@ else if (Type == calendar.HorizontalMonth)
                         {
                             <tr>
                                 <th>
-                                    @resource.Text @resource.Id
+                                    <a href="#" class="resource">
+                                        <img src="https://bc3-production-assets-cdn.basecamp-static.com/5210725/people/BAhpBAkkNQI=--b1af44bd5b68f77ba22f8889ed577e6429496da9/avatar?v=1" alt="user"/>
+                                        <div class="resource-info">
+                                            <p class="resource-name">@resource.Text @resource.Id</p>
+                                            <p class="resource-department">função</p>
+                                        </div>
+                                    </a>
                                 </th>
 
                                 @foreach (var day in DayData)
@@ -325,7 +331,13 @@ else if (Type == calendar.HorizontalYear)
                         {
                             <tr>
                                 <th>
-                                    @resource.Text @resource.Id
+                                   <a href="#" class="resource">
+                                       <img src="https://bc3-production-assets-cdn.basecamp-static.com/5210725/people/BAhpBAkkNQI=--b1af44bd5b68f77ba22f8889ed577e6429496da9/avatar?v=1" alt="user"/>
+                                       <div class="resource-info">
+                                           <p class="resource-name">@resource.Text @resource.Id</p>
+                                           <p class="resource-department">função</p>
+                                       </div>
+                                   </a>
                                 </th>
 
 
@@ -527,7 +539,13 @@ else if (Type == calendar.HorizontalFullYear)
                         {
                             <tr>
                                 <th>
-                                    @resource.Text @resource.Id
+                                    <a href="#" class="resource">
+                                        <img src="https://bc3-production-assets-cdn.basecamp-static.com/5210725/people/BAhpBAkkNQI=--b1af44bd5b68f77ba22f8889ed577e6429496da9/avatar?v=1" alt="user"/>
+                                        <div class="resource-info">
+                                            <p class="resource-name">@resource.Text @resource.Id</p>
+                                            <p class="resource-department">função</p>
+                                        </div>
+                                    </a>
                                 </th>
 
                                 
@@ -548,7 +566,7 @@ else if (Type == calendar.HorizontalFullYear)
                                         var date = new DateTime(CurrentMonthValue.Year, currentmonth, day);
 
                                         <td>
-                                            <div class="resource day" id="@resourse @day @gridMonth" @onclick=@(()=>{Op = 4;dayvalue = day; resourcevalue = resourse; gridmonthValue = gridMonth; dayclick();})>
+                                            <div class="resource-day" id="@resourse @day @gridMonth" @onclick=@(()=>{Op = 4;dayvalue = day; resourcevalue = resourse; gridmonthValue = gridMonth; dayclick();})>
 
                                                 @foreach (var e in eventStored)
                                                 {

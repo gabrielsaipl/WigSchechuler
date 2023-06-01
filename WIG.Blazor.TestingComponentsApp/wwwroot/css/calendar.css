@@ -7,17 +7,18 @@
     --body-color: #252526;
     --brand-font-family: 'Montserrat', sans-serif;
     --week-day-text-color: #A3A6B4;
+    --resource-text-color: #777777;
 
     /* Text Size */
-    --text-size-1: 3em ;
-    --text-size--2: 2.5em ;
-    --text-size-3: 2em ;
-    --text-size-4: 1.5em ;
-    --text-size-5: 1.25em ;
-    --text-size-6: 1em ;
-    --text-size-7: 0.875em ;
-    --text-size-8: 0.75em ;
-    --text-size-9: 0.625em ;
+    --text-size-1: 3em;
+    --text-size--2: 2.5em;
+    --text-size-3: 2em;
+    --text-size-4: 1.5em;
+    --text-size-5: 1.25em;
+    --text-size-6: 1em;
+    --text-size-7: 0.875em;
+    --text-size-8: 0.75em;
+    --text-size-9: 0.625em;
 
     /* Text Weight */
     --weight-thin: 100;
@@ -30,7 +31,9 @@
     --weight-extrabold: 800;
     --weight-black: 900;
 }
-
+a:hover {
+    color: var(--brand-primary);
+}
 .calendar {
     font-family: var(--brand-font-family);
     width: 100%;
@@ -84,6 +87,10 @@
     vertical-align: top;
     text-align: start;
     padding: 3px;
+}
+.calendar-body > .week > .days > .day.current-day {
+    color: var(--brand-primary);
+    font-weight: var(--weight-bold);
 }
 .calendar-body > .week > .days > .day:hover {
     background-color: #eeeeee;
@@ -248,7 +255,6 @@
     border: 1px solid #eee;
 }
 
-
 .calendar-horizontal-month,
 .calendar-horizontal-year {
     max-width: 100%;
@@ -302,12 +308,18 @@
     padding: 15px;
     min-width: 225px;
 }
-
-.calendar-horizontal-month .resource-day {
-    background: white;
-    padding: 12px 0;
+.calendar-horizontal-year .resource-day,
+.calendar-horizontal-month .resource-day{
+    background: #fff;
     height: 50px;
     min-width: 40px;
+    text-align: center;
+    border: 1px solid #EAF0F4;
+    margin: 0;
+}
+.calendar-horizontal-year .resource-week {
+    background: #fff;
+    height: 50px;
     text-align: center;
     border: 1px solid #EAF0F4;
     margin: 0;
@@ -326,10 +338,6 @@
     font-weight: var(--weight-bold);
     color: #535353;
     text-transform: capitalize;
-}
-
-.calendar-horizontal-month .calendar-scroll-x > table > thead > tr > th > .day {
-    min-width: 40px;
 }
 
 .calendar-horizontal-month .calendar-scroll-x > table > thead > tr > th > .current-day {
@@ -380,19 +388,42 @@
 }
 
 /* Year Table Body Weeks */
-.calendar-horizontal-year .resource {
-    background: #fff;
-    height: 50px;
-    text-align: center;
-    border: 1px solid #EAF0F4;
-    margin: 0;
-}
 .calendar-horizontal-year .calendar-scroll-x > table > tbody > tr > td.last-week {
     border-right: 1px solid #BABABA;
 }
 
+.calendar-horizontal-year .resource,
+.calendar-horizontal-month .resource {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--resource-text-color);
+}
 
+.calendar-horizontal-year .resource img,
+.calendar-horizontal-month .resource img {
+    vertical-align: middle;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    margin-left: 1rem;
+}
 
+.calendar-horizontal-year .resource p,
+.calendar-horizontal-month .resource p {
+    margin: 0;
+}
+.resource-info .resource-name {
+    font-weight: var( --weight-semibold);
+    font-size: var(--text-size-7)
+}
+.resource-info .resource-department {
+    font-weight: var( --weight-regular);
+    font-size: var(--text-size-8);
+    text-transform: capitalize;
+}
 
 
 
