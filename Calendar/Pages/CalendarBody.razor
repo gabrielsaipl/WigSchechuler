@@ -347,8 +347,7 @@ else if (Type == calendar.HorizontalYear)
                                         month = j;
                                         Resourse = resource.Id;
                                         var date = new DateTime(CurrentMonthValue.Year, month, 1);
-                                    //Non Working Style
-                                    <td class="last-week">
+                                    <td>
                                             <div class="resource-day" id="@Resourse @month" @onclick=@(() => { Op = 3; monthvalue = month; resourcevalue = Resourse; dayclick(); })>
                                                 @foreach (var ev in EventData)
                                                 {
