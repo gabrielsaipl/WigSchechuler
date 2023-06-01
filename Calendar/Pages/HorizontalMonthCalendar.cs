@@ -138,7 +138,7 @@ namespace Calendar.Pages
         }
 
         //method to create a new event (not working)
-        private void HandleEventAdded(string eventName, DateTime eventDate, string eventDescription, Day day, int Resource)
+        private void HandleEventAdded(string eventName, DateTime eventStartDate, DateTime eventEndDate, string eventDescription, Day day, int Resource)
         {
             showPopup = false;
         }

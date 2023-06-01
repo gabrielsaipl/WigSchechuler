@@ -15,8 +15,12 @@
                 <input type="text" class="form-control" id="eventDescription" @bind="eventDescription" />
             </div>
             <div class="form-group">
-                <label for="eventDate">Data do Evento:</label>
-                <input type="date" class="form-control" id="eventDate" @bind="SelectedDate" />
+                <label for="eventStartDate">Data Inicial do Evento:</label>
+                <input type="date" class="form-control" id="eventStartDate" @bind="SelectedDate" />
+            </div>
+            <div class="form-group">
+                <label for="eventEndDate">Data Final do Evento:</label>
+                <input type="date" class="form-control" id="eventEndDate" @bind="EndDate" />
             </div>
             <div class="form-group">
                 <label for="eventDate">Recurso:</label>
@@ -28,28 +32,59 @@
 </div>
 @code {
     [Parameter]
-    public DateTime SelectedDate { get; set; }
+    public DateTime SelectedDate
+    {
+        get => selectedDate;
+        set
+        {
+            selectedDate = value;
+
+            if (popupOpened)
+            {
+                EndDate = value;
+            }
+        }
+    }
+
     [Parameter]
-    public bool ShowPopup { get; set; }
+    public bool ShowPopup
+    {
+        get => popupOpened;
+        set
+        {
+            popupOpened = value;
+
+            if (popupOpened)
+            {
+                EndDate = SelectedDate;
+            }
+        }
+    }
     [Parameter]
     public Day SelectedDay { get; set; }
     [Parameter]
     public int Resource { get; set; }
     [Parameter]
-    public Action<string, DateTime, string, Day, int> OnEventAdded { get; set; }
+    public Action<string, DateTime, DateTime, string, Day, int> OnEventAdded { get; set; }
 
     private string eventName;
     private string eventDescription;
-
+    private DateTime EndDate;
+    private DateTime selectedDate;
     private string popupStyle => ShowPopup ? "display:block" : "display:none";
-
+    private bool popupOpened = false;
     private void AddEvent()
     {
-        OnEventAdded.Invoke(eventName, SelectedDate, eventDescription, SelectedDay, Resource);
+        if (SelectedDate <= EndDate)
+        {
+            OnEventAdded.Invoke(eventName, SelectedDate, EndDate, eventDescription, SelectedDay, Resource);
+        }
+        else { throw new InvalidOperationException($"Invalid Dates"); }
 
     }
     private void Close()
     {
         ShowPopup = false;
     }
+
 }
