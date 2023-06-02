@@ -161,7 +161,7 @@ else if (Type == calendar.HorizontalMonth)
                                 @foreach (var day in DayData)
                                 {
                                     <td>
-                                        <div class="resource-day" @onclick=@(()=>{Op = 2;dayvalue = day.DayNumber; resourcevalue = resource.Id; dayclick();})>
+                                        <div class="resource-day" @onclick=@(()=>{Op = 2;dayvalue = day.DayNumber; resourcevalue = resource; dayclick();})>
                                             @foreach (var ev in EventData)
                                             {
                                                 if (ev.EventResource == resource.Id)
@@ -344,11 +344,13 @@ else if (Type == calendar.HorizontalYear)
                                     @for (int j = 1; j <= MonthsList.Count; j++)
                                     {
                                         int month, Resourse;
-                                        month = j;
+                                    ResourceData resourceToPass;
+                                    month = j;
                                         Resourse = resource.Id;
-                                        var date = new DateTime(CurrentMonthValue.Year, month, 1);
+                                    resourceToPass = resource;
+                                    var date = new DateTime(CurrentMonthValue.Year, month, 1);
                                     <td>
-                                            <div class="resource-day" id="@Resourse @month" @onclick=@(() => { Op = 3; monthvalue = month; resourcevalue = Resourse; dayclick(); })>
+                                            <div class="resource-day" id="@Resourse @month" @onclick=@(() => { Op = 3; monthvalue = month; resourcevalue = resourceToPass; dayclick(); })>
                                                 @foreach (var ev in EventData)
                                                 {
                                                     if (ev.EventResource == Resourse)
@@ -559,8 +561,10 @@ else if (Type == calendar.HorizontalFullYear)
                                     for (int k = 1; k <= month.Day.Count; k++)
                                     {
                                         int day, resourse, gridMonth;
+                                        ResourceData resourceToPass;
                                         day = k;
                                         resourse = resource.Id;
+                                        resourceToPass = resource;
                                         gridMonth = currentmonth;
                                         var date = new DateTime(CurrentMonthValue.Year, currentmonth, day);
                                         int daysInMonth = DateTime.DaysInMonth(Int32.Parse(YearString), currentmonth);
@@ -571,7 +575,7 @@ else if (Type == calendar.HorizontalFullYear)
                                             cssClass = "last-day";
                                         }
                                             <td class="@cssClass">
-                                            <div class="resource-day" id="@resourse @day @gridMonth" @onclick=@(()=>{Op = 4;dayvalue = day; resourcevalue = resourse; gridmonthValue = gridMonth; dayclick();})>
+                                            <div class="resource-day" id="@resourse @day @gridMonth" @onclick=@(()=>{Op = 4;dayvalue = day; resourcevalue = resourceToPass; gridmonthValue = gridMonth; dayclick();})>
 
                                                 @foreach (var e in eventStored)
                                                 {
@@ -789,15 +793,15 @@ else if (Type == calendar.HorizontalFullYear)
 
     //the method that represents clicking on a specific day (HorizontalMonth.Calendar)
     [Parameter]
-    public Action<int, int> HorizontalMonthDayClickMethod { get; set; }
+    public Action<ResourceData, int> HorizontalMonthDayClickMethod { get; set; }
 
     //the method that represents clicking on a specific day (HorizontalYear.Calendar)
     [Parameter]
-    public Action<int, int> HorizontalYearDayClickMethod { get; set; }
+    public Action<ResourceData, int> HorizontalYearDayClickMethod { get; set; }
 
     //the method that represents clicking on a specific day (HorizontalFullYear.Calendar)
     [Parameter]
-    public Action<int, int, int> HorizontalFullYearDayClickMethod { get; set; }
+    public Action<ResourceData, int, int> HorizontalFullYearDayClickMethod { get; set; }
 
     //the method that represents clicking a specific event
     [Parameter]
@@ -840,7 +844,7 @@ else if (Type == calendar.HorizontalFullYear)
 
     private Day dayy;
     private Event eve;
-    private int resourcevalue;
+    private ResourceData resourcevalue;
     private int dayvalue;
     private int monthvalue;
     private int gridmonthValue;

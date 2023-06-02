@@ -97,6 +97,8 @@
                                     {
                                         string cssClass = "";
                                         int Resourse, e1 = 0, e2 = 0, e3 = 0, e4 = 0, e5 = 0;
+                                        ResourceData resourceToPass;
+                                        resourceToPass = resource;
                                         Resourse = resource.Id;
                                         if ((monthCount + 1) == 2)
                                             {
@@ -142,7 +144,7 @@
                                                                 {
                                                                     dayValue = 28;
                                                                 }
-                                            <div class="resource-week" id="@Resourse" @onclick="() => DayClicked(Resourse, selectedMonth, dayValue, week.WeekNumber)">
+                                            <div class="resource-week" id="@Resourse" @onclick="() => DayClicked(resourceToPass, selectedMonth, dayValue, week.WeekNumber)">
                                                         @foreach (var ev in Events)
                                                         {
                                                             if (ev.EventResource == Resourse)
@@ -250,7 +252,7 @@
         }
 
 
-        <AddEventPopup ShowPopup="@showPopup" Resource="SelectedResource" OnEventAdded="HandleEventAdded" SelectedDate="DateSelected" />
+<AddEventPopup ShowPopup="@showPopup" Resource="SelectedResource" OnEventAdded="HandleEventAdded" SelectedDate="DateSelected" ResourceData="ResourceData" />
 
         <EventDetail Event="EventDetail" ShowDetails="@showDetails"></EventDetail>
 

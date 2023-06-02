@@ -11,7 +11,7 @@ namespace Calendar.Pages
         // Popup variables for parameters
         private Day selectedDay;
         private Event EventDetail;
-        private int SelectedResource;
+        private ResourceData SelectedResource;
         private DateTime DateSelected;
         private bool showPopup = false;
         private bool showDetails = false;
@@ -138,7 +138,7 @@ namespace Calendar.Pages
         }
 
         // Method to show the popup with the current day
-        private void DayClicked(int resourse, int monthNumber, int dayNumber, int weekNumber)
+        private void DayClicked(ResourceData resourse, int monthNumber, int dayNumber, int weekNumber)
         {
             SelectedResource = resourse;
 
@@ -168,7 +168,7 @@ namespace Calendar.Pages
         }
 
         //method to create a new event (not working)
-        private void HandleEventAdded(string eventName, DateTime eventStartDate, DateTime eventEndDate, string eventDescription, Day day, int Resource)
+        private void HandleEventAdded(string eventName, DateTime eventStartDate, DateTime eventEndDate, string eventDescription, Day day, ResourceData Resource)
         {
             var event1 = new Event
             {
@@ -177,7 +177,7 @@ namespace Calendar.Pages
                 EndDate = eventEndDate,
                 Description = eventDescription,
                 SelectedDay = day,
-                EventResource = Resource,
+                EventResource = Resource.Id,
             };
             Events.Add(event1);
             showPopup = false;

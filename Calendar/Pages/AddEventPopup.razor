@@ -24,7 +24,28 @@
             </div>
             <div class="form-group">
                 <label for="eventDate">Recurso:</label>
-                <input type="text" class="form-control" id="eventResource" @bind="Resource" />
+                @*<input type="text" class="form-control" id="eventResource" @bind="@Resource" />*@
+                <div>
+                    <select class="form-control">
+                        @{
+                            if (Resource == null || (Resource.Id == 0 && Resource.Text == null))
+                                        {
+                            ResourceData resource = ResourceData.FirstOrDefault();
+                            Resource = new ResourceData
+                            {
+                                Id = resource.Id,
+                                Text = resource.Text
+                            };
+                        }
+                        }
+                        <option>Clicked/Default: @Resource.Text @Resource.Id</option>
+                        @foreach (var resource in ResourceData)
+                        {
+                            <option>@resource.Text @resource.Id</option>
+                        }
+
+                    </select>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary" @onclick="AddEvent">Adicionar Evento</button>
         </form>
@@ -45,7 +66,6 @@
             }
         }
     }
-
     [Parameter]
     public bool ShowPopup
     {
@@ -61,11 +81,13 @@
         }
     }
     [Parameter]
+    public List<ResourceData> ResourceData { get; set; }
+    [Parameter]
     public Day SelectedDay { get; set; }
     [Parameter]
-    public int Resource { get; set; }
+    public ResourceData Resource { get; set; } = new ResourceData();
     [Parameter]
-    public Action<string, DateTime, DateTime, string, Day, int> OnEventAdded { get; set; }
+    public Action<string, DateTime, DateTime, string, Day, ResourceData> OnEventAdded { get; set; }
 
     private string eventName;
     private string eventDescription;
@@ -73,6 +95,22 @@
     private DateTime selectedDate;
     private string popupStyle => ShowPopup ? "display:block" : "display:none";
     private bool popupOpened = false;
+
+    protected override void OnInitialized()
+    {
+
+        if (Resource == null)
+        {
+            ResourceData resource = ResourceData.FirstOrDefault();
+            Resource = new ResourceData
+                {
+                    Id = resource.Id,
+                    Text = resource.Text
+                };
+        }
+        base.OnInitialized();
+    }
+
     private void AddEvent()
     {
         if (SelectedDate <= EndDate)
@@ -85,6 +123,7 @@
     private void Close()
     {
         ShowPopup = false;
+        StateHasChanged();
     }
 
 }
