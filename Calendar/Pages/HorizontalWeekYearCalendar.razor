@@ -117,8 +117,32 @@
                                             }
 
                                                 <td class="@cssClass">
-                                                @{int selectedMonth = monthCount + 1;}
-                                            <div class="resource-week" id="@Resourse" @onclick="() => DayClicked(Resourse, selectedMonth, week.WeekNumber)">
+                                                @{int selectedMonth = monthCount + 1; int dayValue = 0;}
+                                                @if (week.WeekNumber == 1)
+                                                                {
+                                                                    dayValue = 1;
+                                                                }
+                                                        else if (week.WeekNumber == 2)
+                                                                {
+                                                                    dayValue = 7;
+                                                                    
+                                                                }
+                                                        else if (week.WeekNumber == 3)
+                                                                {
+                                                                    dayValue = 14;
+
+                                                                }
+                                                                //TODO check if year is leap year for week 4 to have 29 days
+                                                        else if (week.WeekNumber == 4)
+                                                                {
+                                                                    dayValue = 21;
+
+                                                                }
+                                                        else if (week.WeekNumber == 5)
+                                                                {
+                                                                    dayValue = 28;
+                                                                }
+                                            <div class="resource-week" id="@Resourse" @onclick="() => DayClicked(Resourse, selectedMonth, dayValue, week.WeekNumber)">
                                                         @foreach (var ev in Events)
                                                         {
                                                             if (ev.EventResource == Resourse)

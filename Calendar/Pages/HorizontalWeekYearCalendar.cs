@@ -138,11 +138,11 @@ namespace Calendar.Pages
         }
 
         // Method to show the popup with the current day
-        private void DayClicked(int resourse, int monthNumber, int weekNumber)
+        private void DayClicked(int resourse, int monthNumber, int dayNumber, int weekNumber)
         {
             SelectedResource = resourse;
 
-            var ClickedDay = new DateTime(_currentMonth.Year, monthNumber, 1);
+            var ClickedDay = new DateTime(_currentMonth.Year, monthNumber, dayNumber);
 
             DateSelected = ClickedDay;
             showDetails = false;
