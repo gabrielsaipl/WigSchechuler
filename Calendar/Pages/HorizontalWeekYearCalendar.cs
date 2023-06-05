@@ -154,7 +154,7 @@ namespace Calendar.Pages
         private void EventDetails(Event ev)
         {
             //EventDetail = ev;
-            //showPopup = false;
+            showPopup = false;
             //showDetails = true;
             //StateHasChanged();
             EventClick.Invoke(ev);

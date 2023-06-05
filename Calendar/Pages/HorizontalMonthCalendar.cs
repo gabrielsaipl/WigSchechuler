@@ -140,8 +140,9 @@ namespace Calendar.Pages
                 EventResource = Resource.Id,
             };
             eventListService.EventList.Add(event1);
-            showPopup = false;
             StateHasChanged();
+            showPopup = false;
+            
         }
         [Parameter]
         public Action<Event> EventClick { get; set; }
@@ -149,7 +150,7 @@ namespace Calendar.Pages
         private void EventDetails(Event ev)
         {
             //EventDetail = ev;
-            //showPopup = false;
+            showPopup = false;
             //showDetails = true;
             //StateHasChanged();
             EventClick.Invoke(ev);
