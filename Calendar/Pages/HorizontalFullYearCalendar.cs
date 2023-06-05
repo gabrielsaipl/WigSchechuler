@@ -155,7 +155,16 @@ namespace Calendar.Pages
         //method to create a new event (not working)
         private void HandleEventAdded(string eventName, DateTime eventStartDate, DateTime eventEndDate, string eventDescription, Day day, ResourceData Resource)
         {
-
+            var event1 = new Event
+            {
+                Title = eventName,
+                StartDate = eventStartDate,
+                EndDate = eventEndDate,
+                Description = eventDescription,
+                SelectedDay = day,
+                EventResource = Resource.Id,
+            };
+            eventListService.EventList.Add(event1);
             showPopup = false;
             StateHasChanged();
         }

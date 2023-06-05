@@ -1,7 +1,6 @@
 ﻿@page "/WIGScheduler"
-@using Calendar.Pages;
+@inject EventListService eventListService
 <PageTitle>WIGScheduler</PageTitle>
-
 <WIGScheduler ResourceData="Resources" EventData="Events" CurrentView="WIGScheduler.View.HorizontalMonth" EventAction="eventclick"></WIGScheduler>
 
 
@@ -27,8 +26,21 @@
     protected override void OnInitialized()
     {
         InitializeEvents();
+        AddListItems();
         InitializeResources();
         base.OnInitialized();
+    }
+    private void AddListItems()
+    {
+        if (eventListService.EventList.Any())
+        {
+            foreach (var eve in eventListService.EventList)
+            {
+                Events.Add(eve);
+            }
+        }
+        
+        
     }
     // Warning : Can only maintain one event with multiple days in the MonthCalendar \\
     private void InitializeEvents()

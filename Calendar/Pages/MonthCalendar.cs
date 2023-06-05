@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-
 namespace Calendar.Pages
 {
     public partial class MonthCalendar
@@ -206,7 +205,7 @@ namespace Calendar.Pages
                 SelectedDay = day,
                 EventResource = Resource.Id,
             };
-            Events.Add(event1);
+            eventListService.EventList.Add(event1);
             showPopup = false;
             StateHasChanged();
         }
