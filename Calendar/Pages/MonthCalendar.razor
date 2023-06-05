@@ -11,7 +11,7 @@
         </CalendarButtonsLeft>
         <CalendarButtons>
             @*<button class="btn btn-primary calendar-view" @onclick=@(()=>{nextView = true;})>Vista</button>*@
-            <CalendarView DisplayName="Calendario Icon" CSSClass="active btn"></CalendarView>
+            <CalendarView Option="View.current" DisplayName="Calendario Icon" CSSClass="active btn"></CalendarView>
             <CalendarView Option="View.HorizontalMonth" DisplayName="Colab Icon" Event="CreateView" CSSClass="btn"></CalendarView>
         </CalendarButtons>
 
