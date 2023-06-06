@@ -25,10 +25,10 @@
             <div class="form-group">
                 <label for="eventResource">Recurso:</label>
                 <div>
-                    <select class="form-control">
+                    <select class="form-control" @onchange="OnSelectedResource">
                         @{
                             if (Resource == null || (Resource.Id == 0 && Resource.Text == null))
-                            {
+                                            {
                                 ResourceData resource = ResourceData.FirstOrDefault();
                                 Resource = new ResourceData
                                 {
@@ -36,11 +36,14 @@
                                     Text = resource.Text
                                 };
                             }
+                            
                         }
-                        <option>Clicked/Default: @Resource.Text @Resource.Id</option>
+                        <option selected="@Resource.Text @Resource.Id">Clicked/Default:@Resource.Text @Resource.Id</option>
                         @foreach (var resource in ResourceData)
                         {
+                            
                             <option>@resource.Text @resource.Id</option>
+                          
                         }
 
                     </select>
@@ -94,7 +97,7 @@
     private DateTime selectedDate;
     private string popupStyle => ShowPopup ? "display:block" : "display:none";
     private bool popupOpened = false;
-
+    private ResourceData SelectedResource = new ResourceData();
     protected override void OnInitialized()
     {
 
@@ -110,11 +113,16 @@
         base.OnInitialized();
     }
 
+    protected override void OnParametersSet()
+    {
+        SelectedResource = Resource;
+    }
+
     private void AddEvent()
     {
         if (SelectedDate <= EndDate && IsValid())
         {
-            OnEventAdded.Invoke(eventName, SelectedDate, EndDate, eventDescription, SelectedDay, Resource);
+            OnEventAdded.Invoke(eventName, SelectedDate, EndDate, eventDescription, SelectedDay, SelectedResource);
         }
         else { throw new InvalidOperationException($"Invalid Dates"); }
         eventDescription = "";
@@ -138,5 +146,12 @@
             && Resource != null && Resource.Id != 0;
     }
 
+    private void OnSelectedResource(ChangeEventArgs e)
+    {
+        var newString = e.Value.ToString().Remove(0, 9);
+        var newInt = int.Parse(newString);
+
+        SelectedResource = ResourceData.FirstOrDefault(r => r.Id == newInt);
+    }
 
 }
