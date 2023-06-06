@@ -16,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label for="eventStartDate">Data Inicial do Evento:</label>
-                <input type="date" class="form-control" id="eventStartDate" @bind="selectedDate" />
+                <input type="date" onfocus="this.showPicker()" class="form-control" id="eventStartDate" @bind="selectedDate" />
             </div>
             <div class="form-group">
                 <label for="eventEndDate">Data Final do Evento:</label>
@@ -46,8 +46,8 @@
                     </select>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" @onclick="AddEvent">Adicionar Evento</button>
         </form>
+        <button class="btn btn-primary" @onclick="AddEvent">Adicionar Evento</button>
     </div>
 </div>
 @code {
@@ -117,10 +117,13 @@
             OnEventAdded.Invoke(eventName, SelectedDate, EndDate, eventDescription, SelectedDay, Resource);
         }
         else { throw new InvalidOperationException($"Invalid Dates"); }
-
+        eventDescription = "";
+        eventName = "";
     }
     private void Close()
     {
+        eventDescription = "";
+        eventName = "";
         ShowPopup = false;
         StateHasChanged();
     }

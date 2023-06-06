@@ -36,7 +36,15 @@
         {
             foreach (var eve in eventListService.EventList)
             {
-                Events.Add(eve);
+                if (Events.Contains(eve))
+                {
+
+                }
+                else
+                {
+                    Events.Add(eve);
+                }
+
             }
         }
         

@@ -127,7 +127,7 @@ namespace Calendar.Pages
             StateHasChanged();
         }
 
-        //method to create a new event (not working)
+        //method to create a new event
         private void HandleEventAdded(string eventName, DateTime eventStartDate, DateTime eventEndDate, string eventDescription, Day day, ResourceData Resource)
         {
             var event1 = new Event
@@ -140,9 +140,23 @@ namespace Calendar.Pages
                 EventResource = Resource.Id,
             };
             eventListService.EventList.Add(event1);
-            StateHasChanged();
+            if (eventListService.EventList.Any())
+            {
+                foreach (var eve in eventListService.EventList)
+                {
+                    if (Events.Contains(eve))
+                    {
+
+                    }
+                    else
+                    {
+                        Events.Add(eve);
+                    }
+
+                }
+            }
             showPopup = false;
-            
+            StateHasChanged();
         }
         [Parameter]
         public Action<Event> EventClick { get; set; }
