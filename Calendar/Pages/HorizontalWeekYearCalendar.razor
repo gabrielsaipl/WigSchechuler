@@ -149,7 +149,7 @@
                                                         {
                                                             if (ev.EventResource == Resourse)
                                                             {
-                                                        if (week.WeekNumber == 1 && ev.StartDate.Month == (monthCount + 1) && (ev.StartDate.Day >= 1 && ev.StartDate.Day < 7))
+                                                        if (week.WeekNumber == 1 && ev.StartDate.Month == (monthCount + 1) && ev.StartDate.Day <= 6 && ev.EndDate.Day >= 1)
                                                                 {
 
                                                                     if (e1 == 0)
@@ -159,7 +159,7 @@
                                                                     }
 
                                                                 }
-                                                        else if (week.WeekNumber == 2 && ev.StartDate.Month == (monthCount + 1) && ((ev.StartDate.Day >= 7 && ev.StartDate.Day < 14) || ev.EndDate.Day >= 7))
+                                                        else if (week.WeekNumber == 2 && ev.StartDate.Month == (monthCount + 1) && ev.StartDate.Day <= 13 && ev.EndDate.Day >= 7)
                                                                 {
 
                                                                     if (e2 == 0)
@@ -168,7 +168,7 @@
                                                                         <div class="event-count3" @onclick:stopPropagation="true" @onclick=@(()=>{EventDetails(ev);})></div>
                                                                     }
                                                                 }
-                                                        else if (week.WeekNumber == 3 && ev.StartDate.Month == (monthCount + 1) && ((ev.StartDate.Day >= 14 && ev.StartDate.Day < 21) || ev.EndDate.Day >= 14))
+                                                        else if (week.WeekNumber == 3 && ev.StartDate.Month == (monthCount + 1) && ev.StartDate.Day <= 20 && ev.EndDate.Day >= 14)
                                                                 {
 
                                                                     if (e3 == 0)
@@ -179,7 +179,7 @@
 
                                                                 }
                                                                 //TODO check if year is leap year for week 4 to have 29 days
-                                                        else if (week.WeekNumber == 4 && ev.StartDate.Month == (monthCount + 1) && ((ev.StartDate.Day >= 21 && ev.StartDate.Day < 28) || ev.EndDate.Day >= 21))
+                                                        else if (week.WeekNumber == 4 && ev.StartDate.Month == (monthCount + 1) && ev.StartDate.Day <= 27 && ev.EndDate.Day >= 21)
                                                                 {
 
                                                                     if (e4 == 0)
@@ -189,7 +189,7 @@
                                                                     }
 
                                                                 }
-                                                        else if (week.WeekNumber == 5 && ev.StartDate.Month == (monthCount + 1) && ((ev.StartDate.Day >= 28 && ev.StartDate.Day < 31) || ev.EndDate.Day >= 28))
+                                                        else if (week.WeekNumber == 5 && ev.StartDate.Month == (monthCount + 1) && ev.StartDate.Day <= 31 && ev.EndDate.Day >= 28)
                                                                 {
 
                                                                     if (e5 == 0)
