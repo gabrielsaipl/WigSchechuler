@@ -1,56 +1,63 @@
 ﻿@using Calendar.Pages
 <div class="popup-container" style="@popupStyle">
     <div class="popup">
-        <div class="calendar-header">
-        <h3>Adicionar Evento</h3>
-        <div class="close" @onclick="Close"> Fechar X</div>
-        </div>
-        <form>
-            <div class="form-group">
-                <label for="eventName">Nome do Evento:</label>
-                <input type="text" class="form-control" id="eventName" @bind="eventName" />
+        <div class="popup-header">
+            <h5>Adicionar Evento</h5>
+            <div class="close" @onclick="Close">
+                <span aria-hidden="true">×</span>
             </div>
-            <div class="form-group">
-                <label for="eventName">Descrição do Evento:</label>
-                <input type="text" class="form-control" id="eventDescription" @bind="eventDescription" />
-            </div>
-            <div class="form-group">
-                <label for="eventStartDate">Data Inicial do Evento:</label>
-                <input type="date" onfocus="this.showPicker()" class="form-control" id="eventStartDate" @bind="selectedDate" />
-            </div>
-            <div class="form-group">
-                <label for="eventEndDate">Data Final do Evento:</label>
-                <input type="date" onfocus="this.showPicker()" class="form-control" id="eventEndDate" @bind="EndDate" />
-            </div>
-            <div class="form-group">
-                <label for="eventResource">Recurso:</label>
-                <div>
-                    <select class="form-control" @onchange="OnSelectedResource">
-                        @{
-                            if (Resource == null || (Resource.Id == 0 && Resource.Text == null))
-                                            {
-                                ResourceData resource = ResourceData.FirstOrDefault();
-                                Resource = new ResourceData
-                                {
-                                    Id = resource.Id,
-                                    Text = resource.Text
-                                };
-                            }
-                            
-                        }
-                        <option selected="@Resource.Text @Resource.Id">Clicked/Default:@Resource.Text @Resource.Id</option>
-                        @foreach (var resource in ResourceData)
-                        {
-                            
-                            <option>@resource.Text @resource.Id</option>
-                          
-                        }
 
-                    </select>
+        </div>
+        <div class="popup-body">
+            <form>
+                <div class="form-group">
+                    <label for="eventName">Nome do Evento:</label>
+                    <input type="text" class="form-control" id="eventName" @bind="eventName" />
                 </div>
-            </div>
-        </form>
-        <button class="btn btn-primary" @onclick="AddEvent">Adicionar Evento</button>
+                <div class="form-group">
+                    <label for="eventName">Descrição do Evento:</label>
+                    <input type="text" class="form-control" id="eventDescription" @bind="eventDescription" />
+                </div>
+                <div class="form-group">
+                    <label for="eventStartDate">Data Inicial:</label>
+                    <input type="date" onfocus="this.showPicker()" class="form-control" id="eventStartDate" @bind="selectedDate" />
+                </div>
+                <div class="form-group">
+                    <label for="eventEndDate">Data Final:</label>
+                    <input type="date" onfocus="this.showPicker()" class="form-control" id="eventEndDate" @bind="EndDate" />
+                </div>
+                <div class="form-group">
+                    <label for="eventResource">Recurso:</label>
+                    <div>
+                        <select class="form-control" @onchange="OnSelectedResource">
+                            @{
+                                if (Resource == null || (Resource.Id == 0 && Resource.Text == null))
+                                {
+                                    ResourceData resource = ResourceData.FirstOrDefault();
+                                    Resource = new ResourceData
+                                    {
+                                        Id = resource.Id,
+                                        Text = resource.Text
+                                    };
+                                }
+
+                            }
+                            <option selected="@Resource.Text @Resource.Id">Clicked/Default:@Resource.Text @Resource.Id</option>
+                            @foreach (var resource in ResourceData)
+                            {
+
+                                <option>@resource.Text @resource.Id</option>
+
+                            }
+
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="popup-footer text-end">
+            <button class="btn btn-primary" @onclick="AddEvent">Adicionar Evento</button>
+        </div>
     </div>
 </div>
 @code {

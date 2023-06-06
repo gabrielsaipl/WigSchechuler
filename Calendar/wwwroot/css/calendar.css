@@ -7,11 +7,8 @@
 }
 
 
-body{
-    background-color: blue;
-}
-
 .calendar-week-day-child {
     border: none;
     background-color: #F5F6FA;
 }
+

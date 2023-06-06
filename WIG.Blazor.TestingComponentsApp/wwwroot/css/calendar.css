@@ -34,6 +34,11 @@
 a:hover {
     color: var(--brand-primary);
 }
+.btn-primary {
+    color: #fff;
+    background-color: var(--brand-primary);
+    border-color: var(--brand-primary);
+}
 .calendar {
     font-family: var(--brand-font-family);
     width: 100%;
@@ -433,5 +438,40 @@ a:hover {
 
 
 
+.popup {
+    background-color: #fefefe;
+    border: 1px solid #888;
+    max-width: 500px;
+    margin: 1.75rem auto;
+}
+.popup-header,
+.popup-body,
+.popup-footer {
+    padding: 1rem;
+}
+.popup-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    border-bottom: 1px solid #e9ecef;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+}
+.popup-header h5{
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+.popup-body form label {
+    font-size: var(--text-size-7);
+}
+.popup-footer {
+    padding-top: 0;
+}
 
 
