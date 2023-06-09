@@ -124,9 +124,7 @@
 
 else if (Type == calendar.HorizontalMonth)
 {
-
     <div class="calendar-horizontal-month" style="display:flex">
-
         <div class="calendar-scroll-x">
             <table class="w-100">
                 <thead>
@@ -147,10 +145,12 @@ else if (Type == calendar.HorizontalMonth)
 
                         @foreach (var resource in ResourceData)
                         {
-                            int numberOfDays = 0, increment = 0;
+                            int numberOfDays = 0, increment = 0, eventIncrement = 0;
                             int[] counter = new int[250];
                             int[] identifier = new int[250];
                             List<Event> eventStored = new List<Event>();
+                            List<Event> eventsBySameDate = new List<Event>();
+                               
                             <tr>
                                 <th>
                                     <a href="#" class="resource">
@@ -166,17 +166,19 @@ else if (Type == calendar.HorizontalMonth)
                                 {
                                     <td>
                                         <div class="resource-day" @onclick=@(()=>{Op = 2;dayvalue = day.DayNumber; resourcevalue = resource; dayclick();})>
+                                            
                                             @foreach (var e in eventStored)
                                             {
                                                 for (int k = 0; k < 250; k++)
                                                 {
-                                                    if (identifier[k] == e.StartDate.Date.Day && counter[k] > 0 && e.StartDate.Date.Day != day.Date.Day && e.EventResource == resource.Id)
+                                                    if (identifier[k] == e.Id && counter[k] > 0 && e.StartDate.Date.Day != day.Date.Day && e.EventResource == resource.Id)
                                                     {
                                                         <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = e; eventclick(e);})>@e.Title</div>
                                                         counter[k] = counter[k] - 1;
                                                     }
-                                                } 
+                                                }
                                             }
+                                                    
                                             @foreach (var ev in EventData)
                                             {
                                                 bool exists = false;
@@ -190,17 +192,18 @@ else if (Type == calendar.HorizontalMonth)
                                                         {
                                                             foreach (var e in eventStored)
                                                             {
-                                                                if (e.StartDate == ev.StartDate)
+                                                                if (e.Id == ev.Id)
                                                                 {
                                                                     exists = true;
                                                                 }
                                                             }
                                                             if (!exists)
-                                                            {
+                                                            { 
                                                                 eventStored.Add(ev);
-                                                                identifier[increment] = ev.StartDate.Date.Day;
-                                                                counter[increment] = numberOfDays;
+                                                                identifier[eventIncrement] = ev.Id;
+                                                                counter[eventIncrement] = numberOfDays;
                                                                 <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick(ev);})>@ev.Title</div>
+                                                                eventIncrement++;
                                                             }
 
                                                         }
@@ -214,7 +217,7 @@ else if (Type == calendar.HorizontalMonth)
                                         </div>
                                         @{
                                             numberOfDays = 0;
-                                            increment++;
+                                            increment++; 
                                         }
                                     </td>
 
@@ -564,17 +567,9 @@ else if (Type == calendar.HorizontalFullYear)
                             monthcount++;
                         }
                     </tr>
-
-
-                                
-               
                 </thead>
 
-
                 <tbody>
-
-
-
                     @Resources
                     @if (Resources == null)
                     {
@@ -592,12 +587,11 @@ else if (Type == calendar.HorizontalFullYear)
                                     </a>
                                 </th>
 
-                                
                                     @{var currentmonth = 1;}
 
                                     @foreach (var month in MonthData)
                                 {
-                                    int numberOfDays = 0, increment = 0;
+                                    int numberOfDays = 0, increment = 0, eventIncrement = 0;
                                     int[] counter = new int[250];
                                     int[] identifier = new int[250];
                                     List<Event> eventStored = new List<Event>();
@@ -619,12 +613,12 @@ else if (Type == calendar.HorizontalFullYear)
                                         }
                                             <td class="@cssClass">
                                             <div class="resource-day" id="@resourse @day @gridMonth" @onclick=@(()=>{Op = 4;dayvalue = day; resourcevalue = resourceToPass; gridmonthValue = gridMonth; dayclick();})>
-
+                                                @{var eventsByDate = eventStored.GroupBy(e => e.StartDate.Date);}
                                                 @foreach (var e in eventStored)
                                                 {
                                                     for (int j = 0; j < 250; j++)
                                                     {
-                                                        if (identifier[j] == e.StartDate.Date.Day && counter[j] > 0 && e.StartDate.Date.Day != k && e.EventResource == resource.Id)
+                                                        if (identifier[j] == e.Id && counter[j] > 0 && e.StartDate.Date.Day != k && e.EventResource == resource.Id)
                                                         {
                                                             <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = e; eventclick(e);})>@e.Title</div>
                                                             counter[j] = counter[j] - 1;
@@ -644,7 +638,7 @@ else if (Type == calendar.HorizontalFullYear)
                                                             {
                                                                 foreach (var e in eventStored)
                                                                 {
-                                                                    if (e.StartDate == ev.StartDate)
+                                                                    if (e.Id == ev.Id)
                                                                     {
                                                                         exists = true;
                                                                     }
@@ -652,9 +646,10 @@ else if (Type == calendar.HorizontalFullYear)
                                                                 if (!exists)
                                                                 {
                                                                     eventStored.Add(ev);
-                                                                    identifier[increment] = ev.StartDate.Date.Day;
-                                                                    counter[increment] = numberOfDays;
+                                                                    identifier[eventIncrement] = ev.Id;
+                                                                    counter[eventIncrement] = numberOfDays;
                                                                     <div class="appointment" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick(ev);})>@ev.Title</div>
+                                                                    eventIncrement++;
                                                                 }
 
                                                             }
@@ -667,7 +662,8 @@ else if (Type == calendar.HorizontalFullYear)
                                                 }
                                             </div>
                                         </td>
-
+                                        increment++;
+                                        eventIncrement++;
                                     }
                                         currentmonth++;
                                 }
@@ -675,7 +671,6 @@ else if (Type == calendar.HorizontalFullYear)
                             </tr>
                         }
                     }
-
 
                 </tbody>
             </table>
@@ -814,9 +809,6 @@ else if (Type == calendar.HorizontalFullYear)
 
         </div>
     *@
-
-
-
 }
 
 @code {
