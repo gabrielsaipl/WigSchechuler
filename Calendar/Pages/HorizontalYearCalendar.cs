@@ -145,35 +145,72 @@ namespace Calendar.Pages
             StateHasChanged();
         }
         //method to create a new event
-        private void HandleEventAdded(string eventName, DateTime eventStartDate, DateTime eventEndDate, string eventDescription, Day day, ResourceData Resource)
+        private void HandleEventAdded(string eventName, DateTime eventStartDate, DateTime eventEndDate, string eventDescription, Day day, List<ResourceData> Resources)
         {
-            var event1 = new Event
+            if (Resources.Count == 1)
             {
-                Title = eventName,
-                StartDate = eventStartDate,
-                EndDate = eventEndDate,
-                Description = eventDescription,
-                SelectedDay = day,
-                EventResource = Resource.Id,
-            };
-            eventListService.EventList.Add(event1);
-            if (eventListService.EventList.Any())
-            {
-                foreach (var eve in eventListService.EventList)
+                var event1 = new Event
                 {
-                    if (Events.Contains(eve))
+                    Title = eventName,
+                    StartDate = eventStartDate,
+                    EndDate = eventEndDate,
+                    Description = eventDescription,
+                    SelectedDay = day,
+                    EventResource = Resources.First().Id,
+                };
+                eventListService.EventList.Add(event1);
+                if (eventListService.EventList.Any())
+                {
+                    foreach (var eve in eventListService.EventList)
                     {
+                        if (Events.Contains(eve))
+                        {
+
+                        }
+                        else
+                        {
+                            Events.Add(eve);
+                        }
 
                     }
-                    else
-                    {
-                        Events.Add(eve);
-                    }
-                    
                 }
+                showPopup = false;
+                StateHasChanged();
             }
-            showPopup = false;
-            StateHasChanged();
+            else if (Resources.Count > 1)
+            {
+                foreach (var resource in Resources)
+                {
+                    var NewEvent = new Event
+                    {
+                        Title = eventName,
+                        StartDate = eventStartDate,
+                        EndDate = eventEndDate,
+                        Description = eventDescription,
+                        SelectedDay = day,
+                        EventResource = resource.Id,
+                    };
+                    eventListService.EventList.Add(NewEvent);
+                }
+                if (eventListService.EventList.Any())
+                {
+                    foreach (var eve in eventListService.EventList)
+                    {
+                        if (Events.Contains(eve))
+                        {
+
+                        }
+                        else
+                        {
+                            Events.Add(eve);
+                        }
+
+                    }
+                }
+                showPopup = false;
+                StateHasChanged();
+            }
+
         }
         [Parameter]
         public Action<Event> EventClick { get; set; }

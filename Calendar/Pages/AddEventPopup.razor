@@ -6,7 +6,9 @@
             <div class="close" @onclick="Close">
                 <span aria-hidden="true">×</span>
             </div>
-
+            @{
+                RenderCounter++;
+            }
         </div>
         <div class="popup-body">
             <form>
@@ -40,17 +42,32 @@
                                         Text = resource.Text
                                     };
                                 }
-
                             }
                             <option selected="@Resource.Text @Resource.Id">Clicked/Default:@Resource.Text @Resource.Id</option>
+                            @if (!ListResources.Contains(SelectedResourceFromDropDown) && RenderCounter > 1 && ListResources.Count == 0)
+                            {
+                                if (SelectedResourceFromDropDown != null)
+                                {
+                                   ListResources.Add(SelectedResourceFromDropDown); 
+                                }
+                                
+                            }
                             @foreach (var resource in ResourceData)
                             {
-
                                 <option>@resource.Text @resource.Id</option>
-
                             }
-
                         </select>
+                        Selected:
+                        @if (ListResources.Any())
+                        {
+                            <div>
+                                @foreach (var item in ListResources)
+                                {
+                                    var str = $"{@item.Text} {@item.Id} ";
+                                    <div @onclick=" () => {ListResources.Remove(item); StateHasChanged();}">@str</div>
+                                }
+                            </div>
+                        }
                     </div>
                 </div>
             </form>
@@ -93,21 +110,23 @@
     public List<ResourceData> ResourceData { get; set; }
     [Parameter]
     public Day SelectedDay { get; set; }
+    /* Resource that is passed from parent*/
     [Parameter]
     public ResourceData Resource { get; set; } = new ResourceData();
     [Parameter]
-    public Action<string, DateTime, DateTime, string, Day, ResourceData> OnEventAdded { get; set; }
-
+    public Action<string, DateTime, DateTime, string, Day, List<ResourceData>> OnEventAdded { get; set; }
+    /* Resource Returned on the AddEvent Method */
+    public List<ResourceData> ListResources = new List<ResourceData>();
     private string eventName;
     private string eventDescription;
     private DateTime EndDate;
     private DateTime selectedDate;
     private string popupStyle => ShowPopup ? "display:block" : "display:none";
     private bool popupOpened = false;
-    private ResourceData SelectedResource = new ResourceData();
+    private ResourceData SelectedResourceFromDropDown = new ResourceData();
+    private int RenderCounter = 0;
     protected override void OnInitialized()
     {
-
         if (Resource == null)
         {
             ResourceData resource = ResourceData.FirstOrDefault();
@@ -122,14 +141,15 @@
 
     protected override void OnParametersSet()
     {
-        SelectedResource = Resource;
+        SelectedResourceFromDropDown = Resource;
     }
 
     private void AddEvent()
     {
         if (SelectedDate <= EndDate && IsValid())
         {
-            OnEventAdded.Invoke(eventName, SelectedDate, EndDate, eventDescription, SelectedDay, SelectedResource);
+            OnEventAdded.Invoke(eventName, SelectedDate, EndDate, eventDescription, SelectedDay, ListResources);
+            ListResources.Clear();
         }
         else { throw new InvalidOperationException($"Invalid Dates"); }
         eventDescription = "";
@@ -139,6 +159,7 @@
     {
         eventDescription = "";
         eventName = "";
+        ListResources.Clear();
         ShowPopup = false;
         StateHasChanged();
     }
@@ -155,10 +176,23 @@
 
     private void OnSelectedResource(ChangeEventArgs e)
     {
-        var newString = e.Value.ToString().Remove(0, 9);
+        string newString = "";
+        if (e.Value.ToString().Length == 10)
+        {
+            newString = e.Value.ToString().Remove(0, 9);
+        }
+        else if (e.Value.ToString().Length > 17)
+        {
+            newString = e.Value.ToString().Remove(0, 25);
+        }
+
         var newInt = int.Parse(newString);
 
-        SelectedResource = ResourceData.FirstOrDefault(r => r.Id == newInt);
+        SelectedResourceFromDropDown = ResourceData.FirstOrDefault(r => r.Id == newInt);
+        if (!ListResources.Contains(SelectedResourceFromDropDown))
+        {
+            ListResources.Add(SelectedResourceFromDropDown);
+        }
     }
 
 }
