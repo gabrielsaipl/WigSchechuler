@@ -110,8 +110,9 @@
                             }
                             else
                             {
+                                var selectedEv = eve;
                                 @* !!!!  TO DO: ORDER USING DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
-                                <div class="appointment" style=" --start: @EventStartWidth; --end: @EventEndWidth; --order: 1; background-color: green;" @onclick=@(()=>{eventclick(eve);})>example</div>
+                                <div class="appointment" style=" --start: @EventStartWidth; --end: @EventEndWidth; --order: 1; background-color: green;" @onclick=@(()=>{eventclick(selectedEv);})>@selectedEv.Title</div>
                             }
                         }
                         IsFirstDay = false;
