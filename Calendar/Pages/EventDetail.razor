@@ -29,6 +29,10 @@
                     <label for="eventResource">Recurso:</label>
                     <input type="text" class="form-control" id="eventResource" @bind="Event.EventResource" readonly />
                 </div>
+                <div class="form-group">
+                    <label for="eventResource">Aceite:</label>
+                    <input type="text" class="form-control" id="eventResource" @bind="AcceptedValue" readonly />
+                </div>
             </form>
         </div>
             
@@ -40,7 +44,25 @@
     [Parameter]
     public Event? Event { get; set; }
 
+    private string AcceptedValue = "";
     private string popupStyle => ShowDetails ? "display:block" : "display:none";
+
+    protected override void OnParametersSet()
+    {
+        if (ShowDetails == true)
+        {
+            AcceptedValueFunc();
+        }
+    }
+
+    private void AcceptedValueFunc()
+    {
+        if (Event.Accepted == true)
+        {
+            AcceptedValue = "Aceite";
+        }
+        else { AcceptedValue = "Aceitação pendente"; }
+    }
 
     private void Close()
     {
