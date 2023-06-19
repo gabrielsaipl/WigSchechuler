@@ -1,4 +1,4 @@
-﻿@page "/WIGScheduler"
+﻿@page "/"
 @inject EventListService eventListService
 <PageTitle>WIGScheduler</PageTitle>
 <WIGScheduler ResourceData="Resources" EventData="Events" CurrentView="WIGScheduler.View.HorizontalMonth" EventAction="eventclick"></WIGScheduler>
@@ -50,7 +50,6 @@
         
         
     }
-    // Warning : Can only maintain one event with multiple days in the MonthCalendar \\
     private void InitializeEvents()
     {
 
@@ -62,6 +61,7 @@
             Description = "Isto representa um evento criado pelo utilizador",
             SelectedDay = new Day { Class = "day2", Date = new DateTime(2023, 5, 7), DayNumber = 7, IsOtherMonth = false },
             EventResource = 1,
+            Accepted = true,
         };
         @*var event12 = new Event
             {

@@ -13,6 +13,7 @@ namespace Calendar.Pages
         public string Description { get; set; }
         public Day SelectedDay { get; set; }
         public int EventResource { get; set; }
+        public bool Accepted { get; set; } = false;
 
     }
 }

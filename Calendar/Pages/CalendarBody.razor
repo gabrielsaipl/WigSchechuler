@@ -2,17 +2,25 @@
 
 @if (Type == calendar.Month)
 {
-    int numberOfDays = 0, increment = 0;
-    int[] counter = new int[100];
-    int[] identifier = new int[100];
+    int numberOfDays = 0, increment = 0, eventIncrement = 0;
+    int[] DaySpanCounter = new int[250];
+    int[] EventOrders = new int[250];
+    for (int i = 0; i < EventOrders.Length; i++)
+    {
+        EventOrders[i] = 1;
+    }
+
+
     List<Event> eventStored = new List<Event>();
     <div class="calendar-body">
         @foreach (var week in WeekData)
         {
+            Day LastDayItem = new Day();
             int DayOfWeek = 0;
-            bool IsFirstDay = true;
-            int EventStartWidth = 0;
-            int EventEndWidth = 0;
+            bool IsFirstDayofWeek = true;
+            int[] EventStartWidths = new int[250];
+            int[] EventEndWidths = new int[250];
+            
             <div class="week">
                 <div class="days">
                     @foreach (var day in week.Days)
@@ -23,99 +31,133 @@
                     }
                 </div>
                 <div class="appointments">
-
                     @foreach (var day in week.Days)
                     {
-                        if (IsFirstDay)
-                        {
-                            foreach (var e in eventStored)
-                            {
-                                if (e.EndDate.Date > day.Date)
-                                {
-                                    EventStartWidth = DayOfWeek;
-                                }
-                            }
-                        }
-                        @foreach (var e in eventStored)
-                        {
-                            for (int i = 0; i < 100; i++)
-                            {
-                                if (identifier[i] == e.StartDate.Date.Day && counter[i] > 0 && e.StartDate.Date.Day != day.Date.Day)
-                                {
-                                    counter[i] = counter[i] - 1;
-                                    if (IsFirstDay)
-                                    {
-                                        EventEndWidth = 0;
-                                    }
-                                    else EventEndWidth += 1;
-
-
-                                }
-                            }
-                        }
-
-                        @foreach (var ev in EventData)
-                        {
+                        int order = 1;
                             bool exists = false;
-                            if (ev.StartDate.Date.Day == day.Date.Day && ev.StartDate.Date.Month == day.Date.Month)
+                            var SingleEventsByDateList = new List<Event>();
+                            var SingleEventsByDate = EventData.GroupBy(e => e.StartDate.Date <= day.Date && e.EndDate.Date >= day.Date && e.StartDate.Date == e.EndDate.Date).ToList();
+                            if (SingleEventsByDate.Count > 1)
                             {
-                                //Event with different start and end dates
-                                if (ev.StartDate.Date.Day != ev.EndDate.Date.Day)
-                                {
-                                    TimeSpan duration = ev.EndDate - ev.StartDate;
-                                    numberOfDays = duration.Days;
-                                    if (numberOfDays > 0 && numberOfDays <= 366)
-                                    {
-                                        foreach (var e in eventStored)
-                                        {
-                                            if (e.StartDate == ev.StartDate)
-                                            {
-                                                exists = true;
-                                            }
-                                        }
-                                        if (!exists)
-                                        {
-                                            eventStored.Add(ev);
-                                            eve = ev;
-                                            identifier[increment] = ev.StartDate.Date.Day;
-                                            counter[increment] = numberOfDays;
-                                            EventStartWidth = DayOfWeek;
-                                            EventEndWidth = EventStartWidth;
-                                        }
 
+                                foreach (var group in SingleEventsByDate)
+                                {
+                                    if (group.Key == true)
+                                    {
+                                        SingleEventsByDateList = group.ToList();
+                                    }
+
+                                }
+                            }
+                                //Single Day Events
+                                if (SingleEventsByDateList.Any()){
+                                    if (SingleEventsByDateList.Count() <= 3)
+                                    {
+                                        foreach (var ev in SingleEventsByDateList)
+                                        {
+                                            <div class="appointment" style=" --start: @DayOfWeek; --end: @DayOfWeek; --order: @order; background-color: orange;" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick(ev);})>@ev.Title</div>
+                                            order++;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        order = 1;
+                                        foreach (var ev in SingleEventsByDateList)
+                                        {
+                                            if (order == 4)
+                                            {
+                                                break;
+                                            }
+                                            <div class="appointment" style=" --start: @DayOfWeek; --end: @DayOfWeek; --order: @order; background-color: orange;" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick(ev);})>@ev.Title</div>
+                                            order++;
+                                        }
+                                            //TODO onclick open OverflowEvent Detail
+                                        <div class="appointment" style=" --start: @DayOfWeek; --end: @DayOfWeek; --order: @order; background-color: orange;" @onclick:stopPropagation="true">@(SingleEventsByDateList.Count() - 3)+</div>
                                     }
                                 }
-                                //Event With same start and end date
-                                else
+                                  
+                                //Multiple Day Events
+                                if (IsFirstDayofWeek)
                                 {
-                                    @* !!!!  TO DO:START, END AND ORDER USING DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
-                                    <div class="appointment" style=" --start: 0; --end: 0; --order: 1; background-color: green;" @onclick:stopPropagation="true" @onclick=@(()=>{eve = ev; eventclick(ev);})>@ev.Title</div>
+                                    foreach (var item in eventStored)
+                                    {
+                                        if (item.EndDate >= day.Date && DaySpanCounter[item.Id] > 0)
+                                        {
+                                            EventStartWidths[item.Id] = DayOfWeek;
+                                        }
+                                    }
                                 }
-                            }
+                                foreach (var item in eventStored)
+                                {
+                                    if (item.EndDate.Date >= day.Date && DaySpanCounter[item.Id] > 0)
+                                    {
+                                         EventEndWidths[item.Id] = DayOfWeek;
+                                         DaySpanCounter[item.Id]--;
+                                    }
+                                }
+                                    var MultipleEventsByDateList = new List<Event>();
+                                    var MultipleEventsByDate = EventData.GroupBy(e => e.StartDate.Date <= day.Date && e.EndDate.Date >= day.Date && e.StartDate.Date != e.EndDate.Date).ToList();
+                                    if (MultipleEventsByDate.Count > 0)
+                                    {
 
-                        }
+                                        foreach (var group in MultipleEventsByDate)
+                                        {
+                                            if (group.Key == true)
+                                            {
+                                                MultipleEventsByDateList = group.ToList();
+                                            }
 
-
-                        numberOfDays = 0;
-                        increment++;
-                        if (IsFirstDay)
-                        {
-                            EventEndWidth = 0;
-                        }
+                                        }
+                                    }
+                                    if (MultipleEventsByDateList.Any())
+                                    {
+                                        foreach (var Event in MultipleEventsByDateList)
+                                        {
+                                            TimeSpan duration = Event.EndDate - Event.StartDate;
+                                            numberOfDays = duration.Days;
+                                            if (numberOfDays > 0 && numberOfDays <= 366)
+                                            {
+                                                foreach (var e in eventStored)
+                                                {
+                                                    if (e.Id == Event.Id)
+                                                    {
+                                                        exists = true;
+                                                    }
+                                                }
+                                                if (!exists)
+                                                {
+                                                    foreach (var item in MultipleEventsByDateList)
+                                                    {
+                                                        //rework this condition to work better
+                                                        if (item.Id != Event.Id && (item.StartDate.Date < Event.StartDate.Date || item.EndDate.Date >= Event.StartDate.Date))
+                                                        {
+                                                            EventOrders[Event.Id]++;
+                                                        }
+                                                    }
+                                                    eventStored.Add(Event);
+                                                    EventStartWidths[Event.Id] = DayOfWeek;
+                                                    EventEndWidths[Event.Id] = EventStartWidths[Event.Id];
+                                                    DaySpanCounter[Event.Id] = numberOfDays;
+                                                }
+                                                exists = false;
+                                            }
+                                            else {throw new ArgumentException ("Invalid Dates");}
+                                        }
+                                    } 
                         DayOfWeek++;
-                        if (DayOfWeek > 6)
+                        IsFirstDayofWeek = false;
+                        LastDayItem = day;
+                    }
+                    @if (DayOfWeek == 7)
+                    {
+                        foreach (var item in eventStored.ToList())
                         {
-                            if (EventStartWidth == 0 && EventEndWidth == 0)
+                            <div class="appointment" style=" --start: @EventStartWidths[item.Id]; --end: @EventEndWidths[item.Id]; --order: @EventOrders[item.Id]; background-color:@(item.Accepted ? "green" : "orange");" @onclick:stopPropagation="true" @onclick=@(()=>{eve = item; eventclick(item);})>@item.Title</div>
+                            if (item.EndDate.Date <= LastDayItem.Date)
                             {
-                            }
-                            else
-                            {
-                                var selectedEv = eve;
-                                @* !!!!  TO DO: ORDER USING DINAMIC VALUES, background color depends (orange - to approve, green - approved) !!!! *@
-                                <div class="appointment" style=" --start: @EventStartWidth; --end: @EventEndWidth; --order: 1; background-color: green;" @onclick=@(()=>{eventclick(selectedEv);})>@selectedEv.Title</div>
+                                eventStored.Remove(item);
                             }
                         }
-                        IsFirstDay = false;
                     }
                 </div>
             </div>
@@ -185,7 +227,7 @@ else if (Type == calendar.HorizontalMonth)
 
                                                 if (eventsByDateList.Count() >= 3)
                                                 {
-                                                    <div class="appointment" @onclick:stopPropagation="true">@(eventsByDateList.Count() - 1) +</div>
+                                                    <div class="appointment" @onclick:stopPropagation="true">@(eventsByDateList.Count() - 1)+</div>
                                                     foreach (var e in eventStored)
                                                     {
                                                         for (int k = 0; k < 250; k++)
