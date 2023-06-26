@@ -1,0 +1,41 @@
+﻿
+<div class="popup-container" style="@popupStyle">
+    <div class="popup">
+        <div class="popup-header">
+            <h5>Eventos</h5>
+            <div class="close" @onclick="Close">
+                <span aria-hidden="true">×</span>
+            </div>
+        </div>
+        <div class="popup-body">
+
+        </div>
+        <div class="popup-footer text-end">
+            <button class="btn" @onclick="Close">Fechar</button>
+        </div>
+    </div>
+</div>
+
+
+@code
+{
+        [Parameter]
+        public bool ShowPopup
+        {
+            get => popupOpened;
+            set
+            {
+                popupOpened = value;
+
+            }
+        }
+        private string popupStyle => ShowPopup ? "display:block" : "display:none";
+        private bool popupOpened = false;
+
+
+    private void Close()
+    {
+        ShowPopup = false;
+        StateHasChanged();
+    }
+}
